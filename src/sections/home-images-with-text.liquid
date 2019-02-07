@@ -1,0 +1,189 @@
+<div
+  class="module-wrapper style-{{ section.settings.style }} border"
+  data-section-id="{{ section.id }}"
+  data-section-type="images-with-text">
+  <div class="module product-details-slideshow">
+    
+    {% if section.settings.title != blank or section.settings.subtitle != blank %}
+      <div class="module-header product-details-slideshow-header">
+        {% if section.settings.title != blank %}
+          <h3 class="module-title">
+            {{ section.settings.title | escape }}
+          </h3>
+        {% endif %}
+        {% if section.settings.subtitle != blank %}
+          <p class="module-subtitle">
+            {{ section.settings.subtitle | escape }}
+          </p>
+        {% endif %}
+      </div>
+    {% endif %}
+    
+    <div class="module-body">
+      <div class="product-details-slideshow-list-container">
+        <ul class="product-details-slideshow-list align-{{ section.settings.alignment }} clearfix">
+          {% for block in section.blocks %}
+            <li
+              class="product-details-slideshow-list-item {% if forloop.first %}active{% endif %}"
+              data-position="{{ forloop.index }}"
+              {{ block.shopify_attributes }}>
+              <div class="product-details-slideshow-list-item-container clearfix">
+                <div class="product-details-slideshow-content">
+                  <div class="product-details-slideshow-content-wrapper">
+
+                    <div class="product-details-slideshow-nav-container">
+                      <ul class="product-details-slideshow-nav-list">
+                        {% for i in section.blocks %}
+                          <li>
+                            <a
+                              href="#"
+                              class="product-details-slideshow-nav-list-item {% if forloop.first %}active{% endif %}"
+                              data-position="{{ forloop.index }}"
+                              tabindex="0">
+                              {{ forloop.index }}
+                            </a>
+                          </li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+
+                    {% if block.settings.title != blank %}
+                      <h4 class="module-title product-details-slideshow-title">
+                        {{ block.settings.title | escape }}
+                      </h4>
+                    {% endif %}
+
+                    {% if block.settings.text != blank %}
+                      <div class="module-content product-details-slideshow-text">
+                        {{ block.settings.text }}
+                      </div>
+                    {% endif %}
+
+                  </div>
+                </div>
+
+                <div class="product-details-slideshow-image-container">
+                  {% if block.settings.image %}
+                    {%
+                      include 'rimg',
+                      class: 'product-details-slideshow-image',
+                      img: block.settings.image,
+                      size: '800x640',
+                      lazy: true
+                    %}
+                  {% else %}
+                    {{ 'image' | placeholder_svg_tag: 'placeholder-svg product-details-slideshow-image' }}
+                  {% endif %}
+                </div>
+
+              </div>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Images with text",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "select",
+      "id": "style",
+      "label": "Background style",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "light",
+          "label": "Light"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subheading"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "800 x 640px .png recommended"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Images with text"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Say a bit about your brand, a specific product, or promotion.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "category": "Image",
+      "name": "Images with text",
+      "blocks": [
+        {
+          "type": "image",
+          "settings": {
+            "text": "<p>Say a bit about your brand, a specific product, or promotion.</p>"
+          }
+        },
+        {
+          "type": "image",
+          "settings": {
+            "text": "<p>Display up to four images, each with their own unique heading and text.</p>"
+          }
+        },
+        {
+          "type": "image",
+          "settings": {
+            "text": "<p>Offer customers a wealth of information while conserving valuable vertical space on your homepage.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

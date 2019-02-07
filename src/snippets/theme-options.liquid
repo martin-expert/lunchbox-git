@@ -1,0 +1,23 @@
+{% capture add_to_cart_button %}{{ 'products.product.add_to_cart' | t }}{% endcapture %}
+{% if product.handle == settings.featured-product-main and settings.product-sale-goal-use %}
+  {% capture add_to_cart_button %}
+    {% if settings.product_sale_goal_button != blank %}
+      {{ settings.product_sale_goal_button | escape }}
+    {% else %}
+      {{ "home.goal.pre_order" | t }}
+    {% endif %}
+  {% endcapture %}
+{% endif %}
+
+{% capture themeGlobals %}
+  <script type="text/javascript">
+    Theme = {};
+    Theme.version = "5.1.10";
+    Theme.currency = '{{ shop.currency }}';
+    shopCurrency = '{{ shop.currency }}'; /* used by shipping calculator */
+    Theme.moneyFormat = {{ shop.money_format | strip_html | json }};
+    Theme.moneyFormatCurrency = {{ shop.money_with_currency_format | strip_html | json }};
+    Theme.enableCurrencyConverter = {{ settings.enable_currency_converter | default: false }};
+  </script>
+{% endcapture %}
+{{ themeGlobals | strip_newlines }}

@@ -1,0 +1,207 @@
+{%- assign _section = section.settings -%}
+<div
+  class="module-wrapper style-{{ _section.style }} border"
+  data-section-id="{{ section.id }}"
+  data-section-type="text-columns">
+  <div class="module home-inline">
+
+    {% if _section.title != blank %}
+      <div class="module-header home-inline-header">
+          <div class="module-title">
+            <h3>{{ _section.title | escape }}</h3>
+          </div>
+        {% if _section.subtitle != blank %}
+          <div class="module-subtitle">
+            {{ _section.subtitle | escape }}
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="module-body home-inline-body">
+      <div
+        class="
+          list
+          column-{{ _section.columns-per-row }}
+          clearfix
+        "
+      >
+
+        {% for block in section.blocks %}
+          {%- assign _block = block.settings -%}
+          <div
+            class="
+              list-item
+              list-item-inline
+              {% if _block.icon != blank  %}
+                has-icon
+              {% endif %}
+            "
+            {{ block.shopify_attributes }}
+          >
+            {% if _block.icon != blank %}
+              <div class="list-image-wrapper">
+                {%
+                  include 'font-icon',
+                  icon: _block.icon,
+                  class: 'list-item-icon',
+                  title: _block.title
+                %}
+              </div>
+            {% endif %}
+
+            <div class="list-text-wrapper">
+              {% if _block.title != blank %}
+                <div class="list-title">
+                  {{ _block.title | escape }}
+                </div>
+              {% endif %}
+
+              {% if _block.text != blank %}
+                <div class="list-text">
+                  {{ _block.text }}
+                </div>
+              {% endif %}
+
+              {% if _block.button_text != blank and _block.button_link != blank %}
+                <div class="list-cta">
+                  {%- if _block.button_link == settings.pre_order_btn_url -%}
+                    <a href="#" data-bk-preorders="https://lunchbox.backerkit.com/overlay_preorders" class="button list-button">
+                  {%- else -%}
+                    <a class="button list-button" href="{{ _block.button_link }}">
+                  {%- endif -%}
+                    {{ _block.button_text | escape }}
+                  </a>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+      {%- if _section.button_text and _section.button_link -%}
+        <div class="module-body image-with-text-body">
+          <div class="module-cta image-with-text-cta image-with-text-body-item">
+            {%- if _section.button_link == settings.pre_order_btn_url -%}
+              <a class="button" href="#" data-bk-preorders="https://lunchbox.backerkit.com/overlay_preorders">
+            {%- else -%}
+              <a class="button" href="{{ _section.button_link }}">
+            {%- endif -%}
+              {{ _section.button_text | escape }}
+            </a>
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Text columns with icons",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "select",
+      "id": "style",
+      "label": "Background style",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "light",
+          "label": "Light"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "range",
+      "id": "columns-per-row",
+      "label": "Columns per row",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Text columns with icons"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subheading"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text_column",
+      "name": "Column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Feature title"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Display up to six features with an option to toggle icons on or off, and add unique calls to action.</p>"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button text"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Link"
+        },
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon name",
+          "default": "image",
+          "info": "[Click here](http:\/\/ionicons.com\/) to view the list of available icons. Example: bluetooth"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "category": "Text",
+      "name": "Text columns with icons",
+      "blocks": [
+        {
+          "type": "text_column"
+        },
+        {
+          "type": "text_column"
+        },
+        {
+          "type": "text_column"
+        }
+      ]
+    }
+  ]
+}
+
+{% endschema %}

@@ -1,0 +1,82 @@
+{% assign location_name = section.settings.location_name | escape %}
+{% assign location_address = section.settings.location_address | escape %}
+
+{% capture location_title %}{{ location_name }}|{{ location_address }}{% endcapture %}
+{% assign location_title = location_title | split : '|' %}
+
+{% assign location_title_string = '' %}
+{%- for string in location_title -%}
+  {%- if string != blank -%}
+    {%- capture location_title_string -%}
+    {{ location_title_string }}, {{ string }}
+  {%- endcapture -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{% assign location_title_string = location_title_string | remove_first: ', ' %}
+
+{% if section.settings.enable %}
+  <div
+    class="module-wrapper"
+    data-section-id="{{ section.id }}"
+    data-section-type="map">
+    <div class="module module-map">
+      <div class="module-body module-map-body">
+        <div id="map-canvas"
+          class="module-map-canvas"
+          data-google-map
+          data-infobox-url="{{ 'infobox.js' | asset_url | escape }}"></div>
+      </div>
+    </div>
+
+    <script type="application/json" data-google-map-json>
+      {
+        "apiKey": {{ section.settings.api_key | json }},
+        "title": {{ location_title_string | json}},
+        "address": {{ location_address | json}},
+        "addressError": {{ 'contact.map.address_error' | t | json }},
+        "addressNoResults": {{ 'contact.map.address_no_results' | t | json }},
+        "addressQueryLimit": {{ 'contact.map.address_query_limit_html' | t | json }},
+        "authError": {{ 'contact.map.auth_error_html' | t | json }}
+      }
+    </script>
+  </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Map",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable",
+      "label": "Enable",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "location_name",
+      "label": "Location title",
+      "info": "ex: Carnegie Hall..."
+    },
+    {
+      "type": "textarea",
+      "id": "location_address",
+      "label": "Address",
+      "info": "ex: 881 7th Ave, New York, NY 10019"
+    },
+    {
+      "id": "api_key",
+      "type": "text",
+      "label": "Google Maps API key",
+      "info": "If your store experiences more than 2,500 visitors a day, you’ll need to generate both [JavaScript](https://developers.google.com/maps/documentation/javascript/get-api-key) and [Geocoding](https://developers.google.com/maps/documentation/geocoding/get-api-key) API keys"
+    }
+  ],
+  "default": {
+    "settings": {
+      "location_name": "Pixel Union",
+      "location_address": "1005 Langley St, Victoria, BC V8W, Canada"
+    }
+  }
+}
+{% endschema %}

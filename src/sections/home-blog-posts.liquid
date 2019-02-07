@@ -1,0 +1,188 @@
+{% assign blog = blogs[section.settings.blog] %}
+{% assign blog_url = blog.url %}
+
+<div class="module-wrapper style-{{ section.settings.style }} border">
+  <div class="module home-blog">
+
+    {% if section.settings.title != blank %}
+      <div class="module-header home-blog-header">
+        <h3 class="module-title home-blog-title">
+          {{ section.settings.title | escape }}
+        </h3>
+
+        {% if section.settings.subtitle != blank %}
+          <p class="module-subtitle home-blog-subtitle">
+            {{ section.settings.subtitle | escape }}
+          </p>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="module-body home-blog-body">
+      <div class="list column-{{ section.settings.posts-to-show }} clearfix">
+        {% if section.settings.blog != 'none' and blog.articles.size > 0 %}
+          {% for article in blog.articles limit: section.settings.posts-to-show %}
+            {% assign has_image = false %}
+            {% assign image = false %}
+            {% assign image_alt = article.title | strip_html | escape %}
+            {% assign background_image = false %}
+            {% assign image_size = '480x' %}
+
+            {% if section.settings.posts-to-show == "2" %}
+              {% assign image_size = '600x' %}
+            {% endif %}
+
+            <div class="list-item list-item-inline">
+              <a class="list-container" href="{{ article.url }}">
+                {% if article.image %}
+                  <div class="list-image-wrapper">
+                    <div
+                      class="list-cover"
+                    >
+                      {%
+                        include 'rimg',
+                        class: 'list-image',
+                        img: article.image,
+                        size: image_size,
+                        crop: 'center',
+                        lazy: true
+                      %}
+                    </div>
+                    <div class="list-overlay"></div>
+                    <div class="list-icon">
+                      {% include 'font-icon', icon: 'ion-plus-round', class: 'list-item-icon', size: '1x' %}
+                    </div>
+                  </div>
+                {% endif %}
+                <div class="list-text-wrapper">
+                  <div class="list-title">
+                    {{ article.title }}
+                  </div>
+                  <div class="list-meta">
+                    {{ article.published_at | date: format: 'short_month' }}
+                  </div>
+                  <div class="list-text">
+                    {{ article.excerpt_or_content | strip_newlines | strip_html | truncate: 140 }}
+                  </div>
+                  <div class="list-cta home-blog-cta">
+                    <span class="list-link">{{ "home.blog.read_more" | t }}</span>
+                  </div>
+                </div>
+              </a>
+            </div>
+          {% endfor %}
+        {% else %}
+          {% assign blog_url = '#' %}
+          {%- capture background_image -%}
+            {%-
+              include 'placeholder_svg_uri',
+              placeholder: 'image'
+            -%}
+          {%- endcapture -%}
+
+          {% for i in (1..section.settings.posts-to-show) %}
+            <div class="list-item">
+              <a class="list-container" href="#">
+                <div class="list-image-wrapper">
+                  {{ 'image' | placeholder_svg_tag: 'placeholder-svg list-image' }}
+                  <div class="list-cover onboarding" style="background-image: url('{{- background_image | strip_newlines  }}')"></div>
+                  <div class="list-overlay"></div>
+                  <div class="list-icon">
+                    {% include 'font-icon', icon: 'ion-plus-round', class: 'list-item-icon', size: '1x' %}
+                  </div>
+                </div>
+                <div class="list-text-wrapper">
+                  <div class="list-title">
+                    {{ 'onboarding.blog.title' | t }}
+                  </div>
+                  <div class="list-meta">
+                    {{ 'now' | date: "%s" | date: "%b %d, %Y" }}
+                  </div>
+                  <div class="list-text">
+                    {{ 'onboarding.blog.excerpt' | t }}
+                  </div>
+                  <div class="list-cta home-blog-cta">
+                    <span class="list-link">{{ "home.blog.read_more" | t }}</span>
+                  </div>
+                </div>
+              </a>
+            </div>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="module-footer home-blog-footer">
+      <a class="home-blog-button button outline" href="{{ blog_url }}">
+        {{ "home.blog.see_all" | t }}
+      </a>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Blog posts",
+  "settings": [
+    {
+      "type": "blog",
+      "id": "blog",
+      "label": "Blog"
+    },
+    {
+      "type": "select",
+      "id": "style",
+      "label": "Background style",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "light",
+          "label": "Light"
+        },
+        {
+          "value": "color",
+          "label": "Color"
+        },
+        {
+          "value": "gradient",
+          "label": "Gradient"
+        }
+      ],
+      "default": "light"
+    },
+    {
+      "type": "range",
+      "id": "posts-to-show",
+      "label": "Number of posts to show",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Blog posts"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subheading"
+    }
+  ],
+  "presets": [
+    {
+      "category": "Blog",
+      "name": "Blog posts",
+      "settings": {
+        "blog": "none"
+      }
+    }
+  ]
+}
+
+{% endschema %}

@@ -1,0 +1,23 @@
+{% assign list_class = section.settings.text_placement | prepend: 'list-text-wrapper-' %}
+
+{% if product_count < 2 %}
+  {% assign column = 1 %}
+{% else %}
+  {% if product_count_odd == 'false' %}
+    {% if product_count < 8 %}
+      {% assign column = 2 %}
+    {% else %}
+      {% assign column = 4 %}
+    {% endif %}
+  {% else %}
+    {% assign column = 3 %}
+  {% endif %}
+{% endif %}
+
+<div class="list collection-list {{ list_class }} column-{{ column }}">
+  {% if product_count > 0 %}
+    {% for product in collection.products %}
+      {% include 'product-list-item' %}
+    {% endfor %}
+  {% endif %}
+</div>

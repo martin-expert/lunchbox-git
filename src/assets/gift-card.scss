@@ -1,0 +1,1418 @@
+
+
+
+
+  
+
+  
+  
+
+  
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+
+  @font-face {
+  font-family: Poppins;
+  font-weight: 400;
+  font-style: normal;
+  src: url("https://fonts.shopifycdn.com/poppins/poppins_n4.934accbf9f5987aa89334210e6c1e9151f37d3b6.woff2?h1=aXRzbXlsdW5jaGJveC5jb20&hmac=79511c67f1708640ff4603f51ae84af8a98fb9095e26d97eefd9d0f558a29e2b") format("woff2"),
+       url("https://fonts.shopifycdn.com/poppins/poppins_n4.ee28d4489eaf5de9cf6e17e696991b5e9148c716.woff?h1=aXRzbXlsdW5jaGJveC5jb20&hmac=066e889a455257e0fac18b43b0e3a5b323cecd3736dd89ae26d44b09dc9afa42") format("woff");
+}
+
+  @font-face {
+  font-family: Poppins;
+  font-weight: 400;
+  font-style: italic;
+  src: url("https://fonts.shopifycdn.com/poppins/poppins_i4.a7e8d886e15d5fb9bc964a53b3278effbf270e9c.woff2?h1=aXRzbXlsdW5jaGJveC5jb20&hmac=65630e275e73fd8895639b3e57a28f46f6d825c6c71b8a606fbb0ad73b08edf9") format("woff2"),
+       url("https://fonts.shopifycdn.com/poppins/poppins_i4.e87de252199e27825a41bf81646996685d86452d.woff?h1=aXRzbXlsdW5jaGJveC5jb20&hmac=42ac9d52d515228f9f1a574e3c6d118b6ff3396b57d7997daa60ab55bfe52a42") format("woff");
+}
+
+
+  
+  
+  
+  
+
+  
+  
+
+  
+  
+    
+    
+    
+    
+
+    
+    @font-face {
+  font-family: Poppins;
+  font-weight: 100;
+  font-style: normal;
+  src: url("https://fonts.shopifycdn.com/poppins/poppins_n1.c38651fae6617112e598a3eae6e304966bb50d9c.woff2?h1=aXRzbXlsdW5jaGJveC5jb20&hmac=50ca1eb30c01ae2aa37f8a3fd49cd3e997b02c94118cf41ee764e8ddff710fd7") format("woff2"),
+       url("https://fonts.shopifycdn.com/poppins/poppins_n1.8a253dc332ef999bbf9099ed24f14b637f0d424d.woff?h1=aXRzbXlsdW5jaGJveC5jb20&hmac=4257524fcdbb618cb372a1f5854f7c4383c9535f034cb07e0657102bc8649b7b") format("woff");
+}
+
+
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+
+    
+    @font-face {
+  font-family: Poppins;
+  font-weight: 100;
+  font-style: italic;
+  src: url("https://fonts.shopifycdn.com/poppins/poppins_i1.6e61c2d68c7500b3f05a3b9a5327a9261fca3a33.woff2?h1=aXRzbXlsdW5jaGJveC5jb20&hmac=e076b85f9d5e7703cc21b86c82e79bf85470b5ea101b67023c1b13d41b9371f6") format("woff2"),
+       url("https://fonts.shopifycdn.com/poppins/poppins_i1.8ae1c939b949ac3a7fdd38c842c9f513f152ce42.woff?h1=aXRzbXlsdW5jaGJveC5jb20&hmac=cc20f46524bd45ea34bbe8223685a3539f8fbbcdd53c7d5832576c50f386f59b") format("woff");
+}
+
+    
+    
+    
+
+    
+
+    
+    
+    
+
+    
+    
+    
+    
+  
+    
+    
+    
+    
+
+    
+    @font-face {
+  font-family: Poppins;
+  font-weight: 700;
+  font-style: normal;
+  src: url("https://fonts.shopifycdn.com/poppins/poppins_n7.58aca33913fc6666cc9e8a53f6b16ec5c3c05a3f.woff2?h1=aXRzbXlsdW5jaGJveC5jb20&hmac=aa67f3a29d2a4fb7a1abd59b1b140cf62ff65fa548ad4d8c01ca576dadc07b21") format("woff2"),
+       url("https://fonts.shopifycdn.com/poppins/poppins_n7.59016f931f3f39434d2e458fba083eb7db7a07d9.woff?h1=aXRzbXlsdW5jaGJveC5jb20&hmac=b8ea7d533cfa4203d07a3c8f2226b7d8da4b812ab87ebad280769f2d07e68ba2") format("woff");
+}
+
+
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+
+    
+    @font-face {
+  font-family: Poppins;
+  font-weight: 700;
+  font-style: italic;
+  src: url("https://fonts.shopifycdn.com/poppins/poppins_i7.4f85a5d51a1aecf426eea47ac4570ef7341bfdc1.woff2?h1=aXRzbXlsdW5jaGJveC5jb20&hmac=97cbf51900beda6521fc82890de1789e54bde37a582c9e77b520a085412dc560") format("woff2"),
+       url("https://fonts.shopifycdn.com/poppins/poppins_i7.aff3a08a92d1c136586c611b9fc43d357dfbbefe.woff?h1=aXRzbXlsdW5jaGJveC5jb20&hmac=4d0f5d16619101598e1c138cc769c5c726f7a0a7b7bc8ac195fdb3a9c429d068") format("woff");
+}
+
+    
+    
+    
+
+    
+
+    
+    
+    
+
+    
+    
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  $font-body: font_body;
+  $font-body-family: Poppins, sans-serif;
+  $font-body-styles: ((normal, italic), (normal, italic), (normal, italic));
+  $font-body-named-styles: ((initial, italic), (initial, italic), (initial, italic));
+  $font-body-weights: (400, 100, 700);
+  $font-body-named-weights: (initial, lighter, bolder);
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+
+  @font-face {
+  font-family: Oswald;
+  font-weight: 400;
+  font-style: normal;
+  src: url("https://fonts.shopifycdn.com/oswald/oswald_n4.a5ee385bde39969d807f7f1297bf51d73fbf3c1e.woff2?h1=aXRzbXlsdW5jaGJveC5jb20&hmac=9ecb8d807a9f27940e5ded0015a4ef6e06cf4ef4f03b2c7ec4755a5da8862918") format("woff2"),
+       url("https://fonts.shopifycdn.com/oswald/oswald_n4.8f3e284746fbc2d29e34993609c51fdc432b0b24.woff?h1=aXRzbXlsdW5jaGJveC5jb20&hmac=e8b35fcd935eed709eb1771d0997f5d9dfb232d0e5c0d0935a02ebb3138952dc") format("woff");
+}
+
+  
+
+  
+  
+  
+  
+
+  
+  
+
+  
+  
+    
+    
+    
+    
+
+    
+    @font-face {
+  font-family: Oswald;
+  font-weight: 700;
+  font-style: normal;
+  src: url("https://fonts.shopifycdn.com/oswald/oswald_n7.f71e68b857a7b8128a7629452b9c6bf9468356a7.woff2?h1=aXRzbXlsdW5jaGJveC5jb20&hmac=307b119a9824eaed7f63ff98ed271027f3f00354bbbe4f7ff8cd4c04ad7c5e63") format("woff2"),
+       url("https://fonts.shopifycdn.com/oswald/oswald_n7.2767cc6e7cfc91284caa2c06eb07eca21a27681e.woff?h1=aXRzbXlsdW5jaGJveC5jb20&hmac=d36c50f83a331e198414e9d83448d0b39e412773eb08a373b79822ec8c625e90") format("woff");
+}
+
+
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+
+    
+
+    
+    
+    
+
+    
+    
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  $font-headings: font_headings;
+  $font-headings-family: Oswald, sans-serif;
+  $font-headings-styles: ((normal, italic), (normal, italic));
+  $font-headings-named-styles: ((initial, italic), (initial, italic));
+  $font-headings-weights: (400, 700);
+  $font-headings-named-weights: (initial, bolder);
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+
+  @font-face {
+  font-family: "Source Sans Pro";
+  font-weight: 700;
+  font-style: normal;
+  src: url("https://fonts.shopifycdn.com/source_sans_pro/sourcesanspro_n7.6e4bcf66f55051b65aaa4326e84ae8a102d8133f.woff2?h1=aXRzbXlsdW5jaGJveC5jb20&hmac=0069c876dca5bbeed02d4ba2544206f0cb7ee3d9572da4c4843194d720beda9c") format("woff2"),
+       url("https://fonts.shopifycdn.com/source_sans_pro/sourcesanspro_n7.ecfda8da3666ac3b2cc9a74e4ec40e786a00309a.woff?h1=aXRzbXlsdW5jaGJveC5jb20&hmac=0d69f5c937f7fac46d13dbc0f680aa49c1b355935ace69558a543ec9e25b6770") format("woff");
+}
+
+  @font-face {
+  font-family: "Source Sans Pro";
+  font-weight: 700;
+  font-style: italic;
+  src: url("https://fonts.shopifycdn.com/source_sans_pro/sourcesanspro_i7.4416f89daaffcddbb852e2f76216eb523ce326f3.woff2?h1=aXRzbXlsdW5jaGJveC5jb20&hmac=634bccb5de9c50bf083ccdd0b5806b7d7f0c4f0ed2053e2c5941b857bdf5454f") format("woff2"),
+       url("https://fonts.shopifycdn.com/source_sans_pro/sourcesanspro_i7.b12601646c6bf735f130ee995ce72d772d45f796.woff?h1=aXRzbXlsdW5jaGJveC5jb20&hmac=09fd3dc9c8381173f669a2702f5aed004d62b3c65dff29dfa66d7da1ae662d9b") format("woff");
+}
+
+
+  
+  
+  
+  
+
+  
+  
+
+  
+  
+    
+    
+    
+    
+
+    
+    @font-face {
+  font-family: "Source Sans Pro";
+  font-weight: 900;
+  font-style: normal;
+  src: url("https://fonts.shopifycdn.com/source_sans_pro/sourcesanspro_n9.6487c308a4afe2c0aa488c6f8b434f111d53482a.woff2?h1=aXRzbXlsdW5jaGJveC5jb20&hmac=62447c321285661fa8ab1e2f36fe279e94020b04a9d3b713d493f241b6b66eed") format("woff2"),
+       url("https://fonts.shopifycdn.com/source_sans_pro/sourcesanspro_n9.0d8c0db06389d06ed1e14082e9f80c9a430fbb4c.woff?h1=aXRzbXlsdW5jaGJveC5jb20&hmac=c2b05ae79c31523de444cd6ccfed7438bce1c3de322f22ce29d7bc70a0a67d0a") format("woff");
+}
+
+
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+
+    
+    @font-face {
+  font-family: "Source Sans Pro";
+  font-weight: 900;
+  font-style: italic;
+  src: url("https://fonts.shopifycdn.com/source_sans_pro/sourcesanspro_i9.f2a964bdfe24f5d4d5c8166c5a5c3784419a6710.woff2?h1=aXRzbXlsdW5jaGJveC5jb20&hmac=b5665b57cd546a16d00a23426f1385a3f291afa294d2b55a9b1acb9b33271355") format("woff2"),
+       url("https://fonts.shopifycdn.com/source_sans_pro/sourcesanspro_i9.de200645fd9f6dbbbe337d6af2c2a231812a2ba5.woff?h1=aXRzbXlsdW5jaGJveC5jb20&hmac=982adbc9ba86bb7190c6249520ac461ed2835b4d53cc8a87e1e4c06b023072af") format("woff");
+}
+
+    
+    
+    
+
+    
+
+    
+    
+    
+
+    
+    
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  $font-buttons: font_buttons;
+  $font-buttons-family: "Source Sans Pro", sans-serif;
+  $font-buttons-styles: ((normal, italic), (normal, italic));
+  $font-buttons-named-styles: ((initial, italic), (initial, italic));
+  $font-buttons-weights: (700, 900);
+  $font-buttons-named-weights: (initial, bolder);
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$font-variables: ($font-body $font-headings $font-buttons);
+$font-variables-families: ($font-body-family $font-headings-family $font-buttons-family);
+$font-variables-weights: ($font-body-weights $font-headings-weights $font-buttons-weights);
+$font-variables-named-weights: ($font-body-named-weights $font-headings-named-weights $font-buttons-named-weights);
+$font-variables-styles: ($font-body-styles $font-headings-styles $font-buttons-styles);
+$font-variables-named-styles: ($font-body-named-styles $font-headings-named-styles $font-buttons-named-styles);
+
+// Find the index of the font setting for cross referencing
+@function font-setting-index($font-type) {
+  @return index($font-variables, $font-type);
+}
+
+// Font
+// --------
+// Find the index of a font weight from its relative name
+// - [$font-type]: Variable of font to look up
+// - [$font-weight]: lighter/initial/bolder
+@function font-weight-index($font-type, $font-weight: initial) {
+  $font-setting-index: font-setting-index($font-type);
+
+  // Look up available weights based on index of font setting
+  $named-weights: nth($font-variables-named-weights, $font-setting-index);
+
+  // Try to find index of desired font weight by cross referencing
+  $weight-index: index($named-weights, $font-weight);
+
+  // Return index of named weight, or return initial weight
+  @return if($weight-index, $weight-index, 1);
+}
+
+// Font
+// --------
+// Find the font family for a font setting
+// - [$font-type]: Variable of font to look up
+@function font-family($font-type) {
+  @return nth($font-variables-families, font-setting-index($font-type));
+}
+
+// Font
+// --------
+// Find a font style relative to a font weight
+// - [$font-type]: Variable of font to look up
+// - [$font-style]: initial/italic
+// - [$font-weight]: lighter/initial/bolder
+@function font-style($font-type, $font-style: initial, $font-weight: initial) {
+  $style: null;
+  $styles: null;
+
+  // Find index of font setting
+  $font-setting-index: font-setting-index($font-type);
+
+  // Get styles based on index of font setting
+  $font-styles: nth($font-variables-styles, $font-setting-index);
+  $font-named-styles: nth($font-variables-named-styles, $font-setting-index);
+
+  // Try to find index of desired font weight by cross referencing
+  $weight-named-index: font-weight-index($font-type, $font-weight);
+
+  // Get styles available for $font-weight
+  $named-weight-style: nth($font-styles, $weight-named-index);
+  $named-weight-named-style: nth($font-named-styles, $weight-named-index);
+
+  // Find position of $font-style
+  $style-named-index: index($named-weight-named-style, $font-style);
+
+  @if $style-named-index {
+    @return nth($named-weight-style, $style-named-index);
+  } @else {
+    // Return initial font style
+    @return nth($named-weight-style, 1);
+  }
+}
+
+// Font weight
+// --------
+// Find a font sensitive relative weight
+// - [$font-type]: Variable of font to look up
+// - [$font-weight]: lighter/initial/bolder
+@function font-weight($font-type, $font-weight: initial) {
+  $weight: null;
+
+  // Find index of font setting
+  $font-setting-index: font-setting-index($font-type);
+
+  // Look up available weights based on index of font setting
+  $weights: nth($font-variables-weights, $font-setting-index);
+
+  // Try to find index of desired font weight by cross referencing
+  $weight-index: font-weight-index($font-type, $font-weight);
+
+  // Return numerical weight of font
+  @return nth($weights, $weight-index);
+}
+
+// Font
+// --------
+// Generate complete font styles for a font setting
+// - [$font-type]: Variable of font to look up
+// - [$font-family]: true/false
+// - [$font-size]: unit/false
+// - [$font-style]: initial/italic/false
+// - [$font-weight]: lighter/initial/bolder/false
+@mixin font(
+  $font-type,
+  $font-family: true,
+  $font-size: false,
+  $font-style: initial,
+  $font-weight: initial
+) {
+  @if $font-family { font-family: font-family($font-type); }
+  @if $font-size { font-size: $font-size; }
+  @if $font-style { font-style: font-style($font-type, $font-style: $font-style, $font-weight: $font-weight ); }
+  @if $font-weight { font-weight: font-weight($font-type, $font-weight: $font-weight); }
+}
+
+
+
+
+
+
+
+
+
+// Colors
+
+$primary-color: #ee907b;
+$primary-color-hover: $primary-color;
+$secondary-color: #84dade;
+$secondary-color-hover: $secondary-color;
+$body-text-color: #636569;
+$body-background-color: #ededed;
+$heading-text-color: #000000;
+$border-color: #c3c3c3;
+
+$error-color: #e13333;
+$success-color: #5bef6b;
+$black: #000;
+$white: #fff;
+$light-grey: #eeeeee;
+$very-light-grey: #fafafa;
+$dark-color: #191919;
+
+// Fonts
+$font-body: $font-body !default;
+$font-headings: $font-headings !default;
+$font-buttons: $font-buttons !default;
+$button-min-width: 220px;
+
+// Logo
+
+$logo-max-width: 200px;
+$logo-max-height: 100px;
+
+// Layout
+
+$gutter: 30px;
+$gutter-half: $gutter / 2;
+$gutter-double: $gutter * 2;
+$gutter-triple: $gutter * 3;
+$max-width: 1200px;
+$ease: cubic-bezier(0.250, 0.460, 0.450, 0.940);
+
+// Typography
+
+$heading-font-size-1: 48px;
+$heading-font-size-1-xs: 38px;
+$heading-font-size-2: 36px;
+$heading-font-size-2-xs: 26px;
+$heading-font-size-3: 22px;
+$heading-font-size-3-xs: 18px;
+$heading-font-size-4: 20px;
+$heading-font-size-4-xs: 18px;
+$heading-font-size-5: 18px;
+
+$body-font-size-1: 16px;
+$body-font-size-2: 14px;
+$body-font-size-3: 12px;
+$body-line-height-1: 28px;
+$body-line-height-2: 26px;
+$subtitle-font-size: 18px;
+$button-height: 55px;
+
+$header-height: 120px;
+$header-small-height: 80px;
+$header-font-size: 12px;
+$header-zindex: 110;
+$header-goal-height: 56px;
+$drawer-font-size: 26px;
+
+$input-number-height: 53px;
+$input-number-width: 75px;
+$input-number-nav-width: 25px;
+$select-height: 55px;
+
+$list-icon-size: 60px;
+$sale-badge-size-small: 45px;
+$sale-badge-size-large: 65px;
+$outline-setting: 4px auto $primary-color;
+
+$stock-badge-size: $body-font-size-2;
+
+// Placeholder colors
+$color-placeholder-background: mix($border-color, $body-background-color);
+$color-placeholder-foreground: $body-text-color;
+
+// Breakpoint Sizes
+
+$l: 1200px;
+$md: 1020px;
+$featured-product: 920px;
+$medium-small: 920px;
+$ipad: 768px;
+$sm: 720px;
+$xs: 480px;
+$bp-spb: 1160px;
+
+// Icons
+
+$icon-fancy: "\e900";
+$icon-rss2: "\ea9c";
+$icon-pinterest: "\ead1";
+$icon-google-plus: "\ea8b";
+$icon-twitter: "\ea96";
+$icon-facebook: "\ea91";
+$icon-info: "\e101";
+$icon-questionmark: "\e102";
+$icon-ruler: "\e105";
+$icon-email: "\e104";
+$icon-pencil: "\e103";
+$icon-shirt: "\e106";
+$icon-amazon-payments: "\e800";
+$icon-american-express: "\41";
+$icon-bitcoin: "\42";
+$icon-dankort: "\e210";
+$icon-diners-club: "\e213";
+$icon-discover: "\e205";
+$icon-dogecoin: "\e908";
+$icon-dwolla: "\e218";
+$icon-forbrugsforeningen: "\e903";
+$icon-jcb: "\e211";
+$icon-litecoin: "\e909";
+$icon-maestro: "\e212";
+$icon-mastercard: "\e202";
+$icon-paypal: "\e204";
+$icon-visa: "\e201";
+$icon-cirrus: "\e208";
+$icon-interac: "\e207";
+$icon-stripe: "\e206";
+$icon-apple-pay: "\e901";
+$icon-shopify-pay: "\e902";
+$icon-cart: "\e600";
+$icon-head: "\e074";
+$icon-menu: "\f125";
+$icon-search: "\e036";
+$icon-mail: "\e907";
+$icon-star: "\e093";
+$icon-star-full: "\e904";
+$icon-plus: "\e114";
+$icon-minus: "\e115";
+$icon-check: "\e116";
+$icon-cross: "\e117";
+$icon-angle-left: "\f104";
+$icon-angle-right: "\f105";
+$icon-angle-down: "\f107";
+$icon-arrow-left: "\e905";
+$icon-arrow-right: "\e906";
+$icon-drawer-facebook: "\e041";
+$icon-drawer-twitter: "\e040";
+$icon-drawer-instagram: "\e057";
+$icon-drawer-youtube: "\e051";
+$icon-drawer-pinterest: "\e043";
+$icon-drawer-googleplus: "\e042";
+$icon-drawer-vimeo: "\e052";
+$icon-drawer-rss: "\e00b";
+
+// Slideshow variables
+// This value also has to match `./scripts/SlideshowView.coffee`, line 214
+$slideshowSpeed: 0.7s;
+
+.gift-card-template {
+  @include font($font-body);
+  margin: 0;
+
+  a {
+    color: $primary-color;
+    text-decoration: none;
+
+    &:hover {
+      color: $primary-color-hover;
+    }
+  }
+
+  .btn {
+    @include font($font-buttons);
+    display: inline-block;
+    padding: 1.5em;
+    font-size: 0.875em;
+    line-height: 1;
+    letter-spacing: 0.1em;
+    color: #fff;
+    text-transform: uppercase;
+    vertical-align: baseline;
+    background-color: $primary-color;
+    border-radius: 4px;
+    zoom: 1;
+  }
+
+  .btn:hover {
+    color: #fff;
+    background-color: $primary-color-hover;
+  }
+
+  .wrap {
+    width: 95%;
+    max-width: 540px;
+    margin: 0 auto;
+
+    &:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+  }
+
+  @-webkit-keyframes slideup {
+    0% {
+      opacity: 0;
+      -webkit-transform: translateY(2000px) rotate(10deg);
+    }
+
+    60% {
+      opacity: 1;
+      -webkit-transform: translateY(-30px);
+    }
+
+    80% {
+      -webkit-transform: translateY(10px);
+    }
+
+    100% {
+      -webkit-transform: translateY(0) rotate(0deg);
+    }
+  }
+
+  @keyframes slideup {
+    0% {
+      opacity: 0;
+      -webkit-transform: translateY(2000px) rotate(10deg);
+    }
+
+    60% {
+      opacity: 1;
+      -webkit-transform: translateY(-30px);
+    }
+
+    80% {
+      -webkit-transform: translateY(10px);
+    }
+
+    100% {
+      -webkit-transform: translateY(0) rotate(0deg);
+    }
+  }
+
+  @-webkit-keyframes popup {
+    0% {
+      opacity: 0;
+      -webkit-transform: translateY(30px);
+    }
+
+    60% {
+      opacity: 1;
+      -webkit-transform: translateY(-10px);
+    }
+
+    80% {
+      -webkit-transform: translateY(2px);
+    }
+
+    100% {
+      -webkit-transform: translateY(0);
+    }
+  }
+
+  @keyframes popup {
+    0% {
+      opacity: 0;
+      -webkit-transform: translateY(30px);
+    }
+
+    60% {
+      opacity: 1;
+      -webkit-transform: translateY(-10px);
+    }
+
+    80% {
+      -webkit-transform: translateY(2px);
+    }
+
+    100% {
+      -webkit-transform: translateY(0);
+    }
+  }
+
+  @-webkit-keyframes container-slide {
+    0% {
+      opacity: 0;
+      -webkit-transform: rotate(0deg);
+    }
+
+    100% {
+      -webkit-transform: rotate(0deg);
+    }
+  }
+
+  @keyframes container-slide {
+    0% {
+      opacity: 0;
+      -webkit-transform: rotate(0deg);
+    }
+
+    100% {
+      -webkit-transform: rotate(0deg);
+    }
+  }
+
+  @-webkit-keyframes fadein {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 100;
+    }
+  }
+
+  @keyframes fadein {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 100;
+    }
+  }
+
+  header {
+    text-align: center;
+    padding: 3em 0;
+    -webkit-animation: fadein 0.5s ease-in-out both 0.4s;
+    animation:fadein 0.5s ease-in-out both 0.4s
+  }
+
+  .shop-title {
+    @include font($font-headings);
+    display: block;
+    max-width: 300px;
+    margin: 0 auto;
+    font-size: 2.25em;
+    color: $primary-color;
+
+    &:hover {
+      color: $primary-color-hover;
+    }
+
+    img {
+      max-height: 100%;
+      margin: 0 auto;
+    }
+  }
+
+  main {
+    padding-bottom: 3em;
+    -webkit-animation: slideup 0.8s ease-in-out;
+    animation: slideup 0.8s ease-in-out;
+  }
+
+  .gift-card-outer-container {
+    background-color: #34aadc;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 0 0 1px rgba(0,0,0,0.1) inset;
+    box-shadow:0 0 0 1px rgba(0,0,0,0.1) inset;
+    padding: 1em;
+    -webkit-animation: container-slide 0.8s ease-in-out;
+    animation: container-slide 0.8s ease-in-out;
+  }
+
+  .gift-card-inner-container {
+    background-color: #fff;
+    -webkit-box-shadow: 0 0 0 1px rgba(0,0,0,0.1);
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.1);
+    border-radius: 2px;
+    -webkit-animation: cardslide 0.8s ease-in-out;
+    animation: cardslide 0.8s ease-in-out;
+
+    &:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+  }
+
+  .gift-card-header {
+    border-bottom: 1px solid #f2f2f2;
+    padding: 0.75em;
+    display: block;
+    overflow: hidden;
+    position: relative;
+
+    h2 {
+      @include font($font-headings);
+      float: left;
+      margin: 0.12em 0;
+    }
+
+    .tag {
+      float: right;
+    }
+  }
+
+  .tag {
+    background-color: $primary-color;
+    padding: 0.5em;
+    padding-bottom: 0.35em;
+    border-radius: 4px;
+    font-size: 0.75em;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #fff;
+    line-height: 1;
+
+    &.light {
+      background: transparent;
+      color: #bfbfbf;
+      border: 1px solid $primary-color;
+    }
+  }
+
+  .gift-card-holder {
+    margin: 0.75em;
+    margin-bottom: 1.25em;
+    margin-top: 1.25em;
+    position: relative;
+
+    .corner {
+      display: block;
+      width: 47px;
+      height: 47px;
+      position: absolute;
+      z-index: 2;
+
+      &.top-left {
+        background: url("//cdn.shopify.com/s/assets/gift-card/corner-top-left-1585103bdd46bf1297b88f31bdfce999.png") 0 0 no-repeat;
+        top: -1px;
+        left: -1px;
+      }
+
+      &.bottom-right {
+        background: url("//cdn.shopify.com/s/assets/gift-card/corner-bottom-right-ba899b18631cb91859e186c2cc1c6970.png") 0 0 no-repeat;
+        bottom: -1px;
+        right: -1px;
+      }
+    }
+  }
+
+  .gift-card {
+    position: relative;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    position: relative;
+
+    &:before {
+      content:  '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      -webkit-box-shadow: inset 0px 0px 0px 1px rgba(0,0,0,0.1);
+      box-shadow: inset 0px 0px 0px 1px rgba(0,0,0,0.1);
+      border-radius: 10px;
+      z-index: 1;
+      pointer-events: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      display: block;
+    }
+
+    img {
+      border-radius: 10px;
+      max-width: 100%;
+    }
+  }
+
+  .gift-card-code-outer {
+    position: absolute;
+    bottom: 1em;
+    text-align: center;
+    width: 100%;
+
+    &.medium {
+      font-size: 0.875em;
+    }
+
+    &.small {
+      font-size: 0.75em;
+    }
+  }
+
+  .gift-card-code-inner {
+    display: inline-block;
+    vertical-align: baseline;
+    zoom: 1;
+    *display: inline;
+    *vertical-align: auto;
+    background-color: #fff;
+    padding: 0.5em;
+    border-radius: 4px;
+    max-width: 450px;
+    -webkit-box-shadow: 0 0 0 1px rgba(0,0,0,0.1);
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.1);
+
+    strong {
+      font-stylet: font-style($font-body);
+      font-weight: font-weight($font-body);
+      font-size: 1.875em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      border: 1px dashed #e5e5e5;
+      padding: 0.4em 0.5em;
+      display: inline-block;
+      vertical-align: baseline;
+      zoom: 1;
+      *display: inline;
+      *vertical-align: auto;
+      color: #777;
+      line-height: 1;
+    }
+  }
+
+  .small .gift-card-code-inner {
+    overflow: auto;
+  }
+
+  .disabled .gift-card-code-inner strong {
+    color: #999;
+    text-decoration: line-through;
+  }
+
+  .gift-card-code-inner span+span {
+    margin-left: 0.25em;
+  }
+
+  .gift-card-amount {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: #fff;
+    font-size: 2.75em;
+    padding: 0.4em 0.5em;
+  }
+
+  .gift-card-amount.medium {
+    font-size: 2.25em;
+  }
+
+  .gift-card-amount strong {
+    text-shadow: 3px 3px 0 rgba(0,0,0,0.1);
+    display: block;
+  }
+
+  .tooltip {
+    position: relative;
+
+    &:hover .tooltip-container {
+      display: block;
+    }
+  }
+
+  .tooltip-container {
+    display: block;
+    position: absolute;
+    top: -100%;
+    right: 50%;
+    z-index: 3;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    -webkit-animation: popup 0.5s ease-in-out both 0.7s;
+    animation: popup 0.5s ease-in-out both 0.7s;
+    top: -50%;
+    margin-top: 0.25em;
+  }
+
+  .tooltip-triangle {
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 5px solid #333;
+    border-top: 5px solid rgba(51,51,51,0.9);
+    position: absolute;
+    left: 100%;
+    bottom: 0;
+    margin-left: -5px;
+    margin-bottom: -5px;
+  }
+
+  .tooltip-label {
+    display: block;
+    position: relative;
+    right: -50%;
+    border: none;
+    border-radius: 4px;
+    background: #333;
+    background: rgba(51,51,51,0.9);
+    color: #fff;
+    min-height: 14px;
+    font-stylet: font-style($font-body);
+    font-weight: font-weight($font-body);
+    font-size: 0.4em;
+    text-decoration: none;
+    line-height: 16px;
+    text-shadow: none;
+    padding: 0.5em 0.75em;
+    margin-left: 0.25em;
+  }
+
+  .gift-card-instructions {
+    font-size: 0.875em;
+    text-align: center;
+    color: #999;
+    margin: 0 0.75em 1.5em;
+  }
+
+  .gift-card-qr-code{
+    display: block;
+
+    img {
+      padding: 1.25em;
+      border: 1px solid #f2f2f2;
+      border-radius: 10px;
+      margin: 0 auto 1.25em;
+    }
+  }
+
+  .gift-card-actions {
+    border-top: 1px solid #f2f2f2;
+    padding: 1.25em 0.75em;
+    text-align: center;
+    position: relative;
+    display: block;
+    overflow: hidden;
+  }
+
+  .action-link {
+    font-size: 0.875em;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: #bfbfbf;
+    margin-top: 1.75em;
+    position: absolute;
+    left: 1.25em;
+    top: 1.25em;
+
+    &:hover {
+      color: #999;
+
+      .ico-16 {
+        opacity: 0.4;
+      }
+    }
+  }
+
+  .ico-16 {
+    display: inline-block;
+    vertical-align: baseline;
+    zoom: 1;
+    *display: inline;
+    *vertical-align: auto;
+    width: 17px;
+    height: 17px;
+    vertical-align: bottom;
+    margin-bottom: -1px;
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    margin-right: 0.5em;
+    opacity: 0.25;
+    -webkit-transition: opacity 0.3s ease-in-out;
+    transition: opacity 0.3s ease-in-out;
+
+    &.print {
+      background-image: url("//cdn.shopify.com/s/assets/gift-card/icon-print-164daa1ae32d10d1f9b83ac21b6f2c70.png");
+    }
+  }
+
+  footer[role='contentinfo'] {
+    padding-bottom: 3em;
+    text-align: center;
+    -webkit-animation: fadein 0.5s ease-in-out both 0.4s;
+    animation: fadein 0.5s ease-in-out both 0.4s;
+  }
+
+  .gift-card-apple-wallet-badge {
+    display: inline-block;
+  }
+
+  .gift-card-apple-wallet-badge-image {
+    display: block;
+  }
+
+  @media screen and (max-width: 580px){
+    body {
+      font-size: 12px;
+    }
+
+    h2 {
+      font-size: 1.5em;
+    }
+
+    .gift-card-outer-container {
+      padding: 0.5em;
+    }
+
+    .tooltip-container {
+      top: -65%;
+    }
+
+    .gift-card-actions .btn {
+      width: 100%;
+      padding-left: 0
+      ;padding-right: 0;
+      font-size: 1.125em;
+    }
+
+    .action-link {
+      position: relative !important;
+      left: auto !important;
+      right: auto !important;
+      top: auto !important;
+      font-size: 1.125em;
+      display: none;
+    }
+
+    .action-link + .action-link {
+      margin-left: 1.5em;
+    }
+  }
+
+  @media screen and (max-width: 400px){
+    h2 {
+      font-size: 1.25em;
+    }
+
+    .gift-card {
+      font-size: 10px;
+    }
+
+    .gift-card-holder .corner {
+      display: none;
+
+      &.bottom-right {
+        background-position: bottom right !important;
+      }
+    }
+
+    .gift-card-amount strong {
+      text-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+    }
+
+    .tooltip-container {
+      top: -75%;
+    }
+  }
+
+  @media screen and (max-height: 800px){
+    .shop-title {
+      max-height: 100px;
+    }
+  }
+
+  @media screen and (max-height: 750px){
+    .shop-title {
+      max-height: 80px;
+    }
+
+    header {
+      padding: 2em 0;
+    }
+
+    footer[role='contentinfo'],
+    main {
+      padding-bottom: 2em;
+    }
+  }
+
+  @media print{
+    @page {
+      margin: 0.5cm;
+    }
+
+    p,
+    h2,
+    h3 {
+      orphans: 3;
+      widows: 3;
+    }
+
+    h2,
+    h3 {
+      page-break-after: avoid;
+    }
+
+    body {
+      background-color: #fff;
+    }
+
+    .gift-card-actions,
+    .gift-card-holder .corner,
+    .tooltip-container,
+    .gift-card:before {
+      display: none;
+    }
+
+    .gift-card-code-inner strong {
+      color: #555;
+    }
+
+    .gift-card-amount .tooltip {
+      color: #fff !important;
+    }
+
+    .shop-title {
+      color: #58686f;
+    }
+
+    .gift-card-outer-container,
+    .gift-card-inner-container,
+    .gift-card-code-inner,
+    .gift-card:before {
+      -webkit-box-shadow: none;
+      box-shadow: none;
+    }
+  }
+}
+

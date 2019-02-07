@@ -1,0 +1,116 @@
+{%
+  include 'product-focus'
+  product: settings.featured-product-main,
+  onboarding: false
+%}
+{% schema %}
+{
+  "name": "Product focus",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "The product focus feature displays the core highlights of your product."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_product_image",
+      "label": "Show product image",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "style",
+      "label": "Background style",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "light",
+          "label": "Light"
+        },
+        {
+          "value": "color",
+          "label": "Color"
+        },
+        {
+          "value": "gradient",
+          "label": "Gradient"
+        }
+      ],
+      "default": "light"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subheading"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Feature"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Let your customers know what details set your product apart from the competition.</p>"
+        },
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon name",
+          "default": "refresh",
+          "info": "[Click here](http:\/\/ionicons.com\/) to view the list of available icons. Example: bluetooth"
+        }
+      ]
+    }
+  ],
+  "default": {
+    "settings": {
+      "title": "Product focus"
+    },
+    "blocks": [
+      {
+        "type": "feature",
+        "settings": {
+          "icon": "refresh"
+        }
+      },
+      {
+        "type": "feature",
+        "settings": {
+          "icon": "volume-high"
+        }
+      },
+      {
+        "type": "feature",
+        "settings": {
+          "icon": "battery-charging"
+        }
+      },
+      {
+        "type": "feature",
+        "settings": {
+          "icon": "microphone"
+        }
+      }
+    ]
+  }
+}
+
+{% endschema %}

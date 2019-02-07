@@ -1,0 +1,13 @@
+<div
+  class="widget-instagram"
+  data-instagram-error="{{ 'general.social.instagram_error' | t }}"
+  data-instagram-token="{{ block.settings.access_token | escape }}">
+  <div data-instagram-photos>
+    {% for i in (1..6) %}
+      <span class="instagram-photo">
+        {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+        {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+      </span>
+    {% endfor %}
+  </div>
+</div>

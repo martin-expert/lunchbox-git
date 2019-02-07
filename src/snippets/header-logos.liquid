@@ -1,0 +1,26 @@
+{% if default_logo %}
+  {%
+    include 'rimg',
+    class: 'branding-logo-image logo-regular',
+    img: default_logo,
+    alt: shop.name,
+    size: '200x100',
+    lazy: false,
+    attr: 'data-header-logo'
+  %}
+  {% if alternate_logo %}
+    {%
+      include 'rimg',
+      class: 'branding-logo-image logo-alternate',
+      img: alternate_logo,
+      alt: shop.name,
+      size: '200x100',
+      lazy: false,
+      attr: 'data-header-logo'
+    %}
+  {% endif %}
+{% else %}
+  <span class="branding-logo-heading">
+    {{ shop.name }}
+  </span>
+{% endif %}

@@ -1,0 +1,103 @@
+{% assign onboard = false %}
+{% assign collection_title = collection.title %}
+{% assign collection_url = collection.url %}
+
+{% if collection == blank %}
+  {% assign onboard = true %}
+  {% assign collection_title = 'onboarding.collection_list.title' | t %}
+  {% assign collection_url = '#' %}
+{% endif %}
+
+{% assign image = false %}
+{% assign has_image = false %}
+{% unless onboard %}
+  {% assign img_src = '' %}
+  {% if custom_image %}
+    {% assign img_src = custom_image %}
+    {% assign has_image = true %}
+  {% elsif collection.image %}
+    {% assign img_src = collection.image %}
+    {% assign has_image = true %}
+  {% elsif collection.products.first.featured_image %}
+    {% assign img_src = collection.products.first.featured_image %}
+    {% assign has_image = true %}
+  {% endif %}
+
+  {%- capture image -%}
+    {%
+      include 'rimg',
+      class: 'list-image',
+      img: img_src,
+      size: '600x600',
+      crop: 'center',
+      lazy: true
+    %}
+  {%- endcapture -%}
+  {%- capture background_image_style -%}
+    {%
+      include 'rimg',
+      background: true,
+      img: img_src,
+      size: '600x600',
+      crop: 'center',
+      lazy: true
+    %}
+  {%- endcapture -%}
+{% endunless %}
+
+{% unless has_image %}
+  {%- capture index -%}
+    {%- cycle '1', '2', '3', '4', '5', '6' -%}
+  {%- endcapture -%}
+  {% assign placeholder_image_style = 'collection-' | append: index %}
+  {%- capture placeholder_background_image -%}
+    {%-
+      include 'placeholder_svg_uri',
+      placeholder: placeholder_image_style
+    -%}
+  {%- endcapture -%}
+
+  {%- capture image -%}
+    {{ placeholder_image_style | placeholder_svg_tag: 'placeholder-svg list-image' }}
+  {%- endcapture -%}
+
+  {%- capture background_image_style -%}
+    style="background-image: url('{{ placeholder_background_image }}');"
+  {%- endcapture -%}
+{% endunless %}
+
+<div class="list-item list-item-aspected">
+  <a class="list-container" href="{{ collection_url }}">
+    <div class="list-image-wrapper">
+      <div
+        class="
+          list-cover
+          {% unless has_image %}
+            list-cover-placeholder
+          {% endunless %}
+        "
+        {{ background_image_style }}
+      >
+        {{ image }}
+      </div>
+      <div class="list-overlay"></div>
+    </div>
+    <div class="list-text-wrapper">
+      <div class="list-title">
+        {{ collection_title }}
+      </div>
+
+      {% if show_product_count and collection.products_count > 0 %}
+        <div class="list-meta">
+          {{ 'collections.collection.product_count' | t: count: collection.products_count }}
+        </div>
+      {% endif %}
+
+      {% if collection.description != blank and settings.collections-show-description %}
+        <div class="list-text">
+          {{ collection.description | strip_html | truncate: 100 }}
+        </div>
+      {% endif %}
+    </div>
+  </a>
+</div>

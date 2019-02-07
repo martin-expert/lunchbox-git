@@ -1,0 +1,30 @@
+{% assign username = block.settings.username | replace: '@', '' | escape %}
+{% assign retweets = block.settings.retweets %}
+{% assign onboarding = false %}
+
+{% if username == blank %}
+  {% assign onboarding = true %}
+  {% assign username = 'onboarding.twitter.username' | t %}
+{% endif %}
+
+<div
+  class="widget-twitter"
+  data-twitter-username="{{ username }}"
+  {% if retweets %}data-show-retweets{% endif %}>
+
+  <div class="icon icon-twitter"></div>
+
+  {% unless onboarding %}
+      <div class="widget-twitter-tweet" data-twitter-tweets></div>
+    {% else %}
+      <div class="widget-twitter-tweet">
+        <div class="user">@{{ username }}</div>
+        <p>{{ 'onboarding.twitter.tweet' | t }}</p>
+      </div>
+    {% endunless %}
+
+  {%- capture twitter_link -%}
+    <a href="http://www.twitter.com/{{ username }}">@{{ username }}</a>
+  {%- endcapture -%}
+  <div class="twitter-follow">{{ 'general.social.follow_on_twitter_html' | t: twitter_link: twitter_link }}</div>
+</div>

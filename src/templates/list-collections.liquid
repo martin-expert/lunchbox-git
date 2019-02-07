@@ -1,0 +1,37 @@
+{% assign using_linklist = false %}
+{% assign pagination = 12 %}
+{% if linklists['all-collections'] and linklists['all-collections'].links.size > 0 %}
+  {% assign using_linklist = true %}
+  {% assign pagination = 50 %}
+{% endif %}
+
+<div class="module-wrapper">
+  <div class="module collections">
+    <div class="module-header collections-header">
+      <div class="module-title">
+        <h1>{{ 'collections.listing.header' | t }}</h1>
+      </div>
+    </div>
+    <div class="module-body collections-body">
+      {% paginate collections by pagination %}
+        <div class="list column-3">
+          {% if using_linklist %}
+            {% for link in linklists['all-collections'].links %}
+              {%
+                include 'collection-list-item',
+                collection: collections[link.object.handle]
+              %}
+            {% endfor %}
+          {% else %}
+            {% for collection in collections %}
+              {% include 'collection-list-item' %}
+            {% endfor %}
+          {% endif %}
+        </div>
+        {% if paginate.previous or paginate.next and using_linklist == false %}
+          {% include 'pagination' %}
+        {% endif %}
+      {% endpaginate %}
+    </div>
+  </div>
+</div>

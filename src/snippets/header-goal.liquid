@@ -1,0 +1,38 @@
+{% capture productGoalHandle %}{{ settings.featured-product-main }}{% endcapture %}
+{% if all_products[productGoalHandle].variants.first.inventory_management == "shopify" %}
+  {% if settings.product_goal_starting_quantity != blank %}
+    {% if settings.product_goal != blank %}
+
+      {% capture productGoalStartingQuantity %}{{ settings.product_goal_starting_quantity | escape }}{% endcapture %}
+
+      {% assign productGoalInventory = 0 %}
+      {% for variant in all_products[productGoalHandle].variants %}
+        {% assign productGoalInventory = productGoalInventory | plus: variant.inventory_quantity %}
+      {% endfor %}
+
+      {% capture productGoalPrice %}{{ all_products[productGoalHandle].variants.first.price }}{% endcapture %}
+      {% capture productGoal %}{{ settings.product_goal | ecape }}{% endcapture %}
+      {% capture productGoalTotalSold %}{{ productGoalStartingQuantity | minus: productGoalInventory }}{% endcapture %}
+      {% capture productGoalAchievement %}{{ productGoalTotalSold | times: 100 | divided_by: productGoal | floor }}{% endcapture %}
+
+      <div class="module-wrapper module-header-goal-wrapper style-{{ settings.product-sale-goal-style }} ">
+        <div class="module module-header-goal">
+          <a class="module-body module-header-body" href="{{ all_products[settings.featured-product-main].url }}">
+            <div class="icon icon-star-full module-header-goal-item module-header-goal-item-icon"></div>
+            <div class="module-header-goal-item">{{ "home.goal.title_html" | t: result: productGoalAchievement }}</div>
+            <div class="icon icon-arrow-right module-header-goal-item module-header-goal-item-icon"></div>
+            <div data-goal-countdown class="module-header-goal-item module-header-goal-countdown" data-end-time="{{ settings.product_sale_goal_date_time | escape }}" data-alt-text="{{ "general.general.last_day" | t }}">
+              <span data-goal-countdown-days>0</span> {{ "general.general.days" | t }}
+              <span data-goal-countdown-hours>0</span> {{ "general.general.hours" | t }}
+              <span data-goal-countdown-minutes>0</span> {{ "general.general.minutes" | t }}
+              <span data-goal-countdown-seconds>0</span> {{ "general.general.seconds" | t }}
+              {{ "general.general.left" | t }}
+            </div>
+            <div class="module-header-goal-item module-header-goal-time-up hidden">{{ "general.general.time_up" | t }}</div>
+          </a>
+        </div>
+      </div>
+
+    {% endif %}
+  {% endif %}
+{% endif %}

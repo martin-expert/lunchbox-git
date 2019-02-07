@@ -1,0 +1,87 @@
+{% if product or onboarding %}
+  {% assign featured_product = false %}
+  {% assign featured_image_alignment = 'default' %}
+
+  {% if product %}
+    {% assign featured_product = all_products[product] %}
+  {% endif %}
+
+  <div class="module-wrapper style-{{ section.settings.style }} border">
+    <div class="module product-focus-wrapper {% if featured_image_alignment == 'bottom' %}align-image-to-section{% endif %}">
+
+      {% if section.settings.title != blank or section.settings.subtitle != blank %}
+        <div class="module-header">
+          {% if section.settings.title != blank %}
+            <h2 class="module-title product-focus-title">
+              {{ section.settings.title | escape }}
+            </h2>
+          {% endif %}
+
+          {% if section.settings.subtitle != blank %}
+            <p class="module-subtitle">
+              {{ section.settings.subtitle | escape }}
+            </p>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      {% if section.settings.show_product_image or section.blocks.size > 0 %}
+        <div class="module-body clearfix {% if section.blocks.size > 0 %}product-focus-has-content{% endif %}">
+          {% if section.settings.show_product_image %}
+            {% if featured_product %}
+              <div class="product-focus-hero-image-container">
+                <div class="product-focus-hero-image">
+                  {%
+                    include 'rimg',
+                    img: featured_product.featured_image,
+                    size: '600x',
+                    lazy: true
+                  %}
+                </div>
+              </div>
+              {% elsif onboarding %}
+                <div class="product-focus-hero-image-container">
+                  <div class="product-focus-hero-image">
+                    {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                  </div>
+                </div>
+              {% endif %}
+          {% endif %}
+
+          {% if section.blocks.size > 0 %}
+            <div class="product-focus-list-container {% unless section.settings.show_product_image %}no-image{% endunless %}">
+              <ul class="product-focus-list clearfix">
+                {% assign counter = 0 %}
+                {% for block in section.blocks %}
+                  {% assign counter = counter | plus: 1 %}
+                  <li
+                    class="product-focus-list-item list-item-{{ counter }}"
+                    {{ block.shopify_attributes }}
+                    >
+                    {% if block.settings.icon != blank %}
+                      {%
+                        include 'font-icon',
+                        icon: block.settings.icon,
+                        class: 'product-focus-list-item-icon',
+                        title: block.settings.title,
+                      %}
+                    {% endif %}
+                    <h4 class="module-title product-focus-list-item-title">
+                      {{ block.settings.title | escape }}
+                    </h4>
+                    {% if block.settings.text != blank %}
+                      <div class="module-content product-focus-list-item-text rte">
+                        {{ block.settings.text }}
+                      </div>
+                    {% endif %}
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          {% endif %}
+
+        </div>
+      {% endif %}
+    </div>
+  </div>
+{% endif %}

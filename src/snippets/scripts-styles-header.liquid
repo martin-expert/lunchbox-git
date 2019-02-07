@@ -1,0 +1,25 @@
+<link rel="preconnect" href="//cdn.shopify.com">
+<link rel="preconnect" href="//code.ionicframework.com">
+<link rel="preconnect" href="//fonts.googleapis.com">
+
+<!-- Theme CSS -->
+{{ 'theme.scss.css' | asset_url | stylesheet_tag }}
+
+<!-- Store object -->
+{% include 'theme-options' %}
+
+{% comment %}
+  Setup Pre-order Widget
+{% endcomment %}
+  <script>
+    (function() {
+      var script = document.createElement('script');
+      script.src = 'https://backerkit.com/assets/preorders.js';
+      script.async = true;
+      var entry = document.getElementsByTagName('script')[0];
+      entry.parentNode.insertBefore(script, entry);
+      script.onload = function() {
+        console.log('loaded');
+      }
+    })();
+  </script>

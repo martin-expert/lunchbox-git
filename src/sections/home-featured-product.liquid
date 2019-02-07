@@ -1,0 +1,67 @@
+{% assign product = all_products[section.settings.product_handle] %}
+{% assign onboarding = false %}
+{% if product.empty? %}
+  {% assign onboarding = true %}
+{% endif %}
+
+{% assign form_id = section.id %}
+{% unless onboarding %}
+  {% assign form_id = form_id | append: '-' | append: product.id %}
+{% endunless %}
+
+{%
+  include 'product-main',
+  product: product,
+  form_id: form_id,
+  onboarding: onboarding,
+  is_featured: true,
+  show_spb: section.settings.show_spb,
+  section_type: 'home-featured-product'
+%}
+
+{% schema %}
+{
+  "name": "Featured product",
+  "class": "home-featured-product",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product_handle",
+      "label": "Product"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_zoom",
+      "label": "Enable image zoom",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_spb",
+      "label": "Show dynamic checkout button",
+      "default": true,
+      "info": "Each customer will see their preferred payment method from those available on your store, such as PayPal or Apple Pay. [Learn more](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_cart_redirect",
+      "label": "Enable cart redirection",
+      "info": "Automatically sends users to the Cart page after adding a product.",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "enable-share-buttons",
+      "label": "Show share buttons",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "category": "Product",
+      "name": "Featured product"
+    }
+  ]
+}
+
+{% endschema %}

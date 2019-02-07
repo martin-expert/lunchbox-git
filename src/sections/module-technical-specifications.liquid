@@ -1,0 +1,275 @@
+<div class="module-wrapper style-{{ section.settings.style }} border">
+  <div class="module product-specification">
+    {% if section.settings.title != blank or section.settings.subtitle != blank %}
+      <div class="module-header product-specification-header">
+        {% if section.settings.title != blank %}
+          <h2 class="module-title product-specification-titles">
+            {{ section.settings.title | escape }}
+          </h2>
+        {% endif %}
+        
+        {% if section.settings.subtitle != blank %}
+          <p class="module-subtitle">
+            {{ section.settings.subtitle | escape }}
+          </p>
+        {% endif %}
+      </div>
+    {% endif %}
+    
+    <div class="module-body product-specification-body">
+      <div class="product-specification-left-right-features">
+        <div class="product-specification-left-right-feature clearfix media-aligned-{{ section.settings.image_alignment }}">
+          {% if section.settings.specification_image and section.settings.image_alignment == 'left' %}
+            <div
+              class="
+                product-specification-left-right-section
+                product-specification-left-right-media
+              "
+            >
+              {%
+                include 'rimg',
+                class: 'product-specification-left-right-image',
+                img: section.settings.specification_image,
+                size: '960x',
+                lazy: true
+              %}
+            </div>
+          {% endif %}
+
+          {% if section.blocks.size > 0 %}
+            <div class="product-specification-left-right-section product-specification-left-right-text {{ section.settings.image_alignment }}">
+              <div class="product-specification-list-container">
+                <ul class="product-specification-list">
+                  {% assign counter = 0 %}
+                  {% for block in section.blocks %}
+                    {% assign counter = counter | plus: 1 %}
+                    <li
+                      class="product-specification-list-item list-item-{{ counter }} clearfix"
+                      {{ block.shopify_attributes }}>
+                      <div class="product-specification-list-item-left">
+                        {% if block.settings.icon != blank %}
+                          {%
+                            include 'font-icon',
+                            icon: block.settings.icon,
+                            class: 'product-specification-list-item-icon',
+                            title: block.settings.title,
+                            size: 'custom'
+                          %}
+                        {% endif %}
+                        {% if block.settings.title != blank %}
+                          <h4 class="module-title product-specification-list-item-title">
+                            {{ block.settings.title | escape }}
+                          </h4>
+                        {% endif %}
+                      </div>
+                      {% if block.settings.text != blank %}
+                        <div class="product-specification-list-item-right">
+                          <div class="module-content product-specification-list-item-text rte">
+                            {{ block.settings.text }}
+                          </div>
+                        </div>
+                      {% endif %}
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+          {% endif %}
+          
+          {% if section.settings.specification_image and section.settings.image_alignment == 'right' %}
+            <div
+              class="
+                product-specification-left-right-section
+                product-specification-left-right-media
+              "
+            >
+              {%
+                include 'rimg',
+                class: 'product-specification-left-right-image',
+                img: section.settings.specification_image,
+                size: '960x',
+                lazy: true
+              %}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    {% if section.settings.specification_download_image %}
+      <div class="module-footer product-specification-footer">
+        <div class="module-cta product-specification-cta">
+          <a 
+            class="button outline product-specification-button"
+            href="{{ section.settings.specification_download_image | img_url: '2048x2048' }}" 
+            download="{{ section.settings.specification_download_image | img_url: '2048x2048' }}" target="_blank">
+            {% if section.settings.specification_download_text != blank %}
+              {{ section.settings.specification_download_text | escape }}
+            {% else %}
+              {{ "products.product.full_spec" | t }}
+            {% endif %}
+          </a>
+        </div>
+        
+        {% if section.settings.specification_download_title != blank %}
+          <div class="module-cta-subline">
+            {{ section.settings.specification_download_title | escape }}
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Technical specifications",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "The technical specs feature displays all the fine-grained details about your product in a meaningful way"
+    },
+    {
+      "type": "select",
+      "id": "style",
+      "label": "Background style",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "light",
+          "label": "Light"
+        },
+        {
+          "value": "color",
+          "label": "Color"
+        },
+        {
+          "value": "gradient",
+          "label": "Gradient"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "select",
+      "id": "image_alignment",
+      "label": "Align image",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Technical specifications"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subheading"
+    },
+    {
+      "type": "image_picker",
+      "id": "specification_image",
+      "label": "Product image",
+      "info": "960px wide .png recommended"
+    },
+    {
+      "type": "header",
+      "content": "Download section"
+    },
+    {
+      "type": "image_picker",
+      "id": "specification_download_image",
+      "label": "Download specification image",
+      "info": "1500px wide .jpg recommended"
+    },
+    {
+      "type": "text",
+      "id": "specification_download_text",
+      "label": "Button text"
+    },
+    {
+      "type": "text",
+      "id": "specification_download_title",
+      "label": "Subheading"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "specification",
+      "name": "Specification",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Specification"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Let your customers know what details set your product apart from the competition.</p>"
+        },
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon name",
+          "default": "refresh",
+          "info": "[Click here](http:\/\/ionicons.com\/) to view the list of available icons. Example: bluetooth"
+        }
+      ]
+    }
+  ],
+  "default": {
+    "settings": {
+      "title": "Technical specifications"
+    },
+    "blocks": [
+      {
+        "type": "specification",
+        "settings": {
+          "icon": "refresh"
+        }
+      },
+      {
+        "type": "specification",
+        "settings": {
+          "icon": "volume-high"
+        }
+      },
+      {
+        "type": "specification",
+        "settings": {
+          "icon": "battery-charging"
+        }
+      },
+      {
+        "type": "specification",
+        "settings": {
+          "icon": "microphone"
+        }
+      }
+    ]
+  }
+}
+
+{% endschema %}

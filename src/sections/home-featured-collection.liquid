@@ -1,0 +1,141 @@
+{% assign per_row = section.settings.products-per-row %}
+{% assign product_rows = section.settings.product-rows %}
+{% assign collection = section.settings.collection %}
+{% assign product_limit = product_rows | times: per_row %}
+{% assign list_class = section.settings.text_placement | prepend: 'list-text-wrapper-' %}
+
+<div class="module-wrapper style-{{ section.settings.style }} border">
+  <div class="module home-products">
+
+    {% if section.settings.title != blank %}
+      <div class="module-header home-products-header">
+        <h3 class="module-title">
+          {{ section.settings.title | escape }}
+        </h3>
+
+        {% if section.settings.subtitle != blank %}
+          <p class="module-subtitle">
+            {{ section.settings.subtitle | escape }}
+          </p>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="module-body home-products-body">
+      <div class="list column-{{ per_row }} {{ list_class }}">
+        {% for product in collections[section.settings.collection].products limit: product_limit %}
+          {% include 'product-list-item',
+             list_style: 'list-item-aspected',
+             show_cover_image: true,
+          %}
+        {% else %}
+          {% for i in (1..product_limit) %}
+            {% assign title = 'onboarding.featured_collection.product_title' | t %}
+            {%
+              include 'product-list-item',
+              onboarding: true,
+              onboarding_title: title,
+              onboarding_price: 0
+            %}
+          {% endfor %}
+        {% endfor %}
+      </div>
+    </div>
+
+    {% if section.settings.button_text != blank and collections[section.settings.collection] != empty %}
+      <div class="module-footer home-products-footer">
+        <a class="button" href="{{ collections[section.settings.collection].url }}">
+          {{ section.settings.button_text | escape }}
+        </a>
+      </div>
+    {% endif %}
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Featured collection",
+  "settings": [
+    {
+      "type": "select",
+      "id": "style",
+      "label": "Background style",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "light",
+          "label": "Light"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "select",
+      "id": "text_placement",
+      "label": "Product information placement",
+      "options": [
+        {
+          "value": "overlay",
+          "label": "Overlay image"
+        },
+        {
+          "value": "below",
+          "label": "Below image"
+        }
+      ],
+      "default": "overlay",
+      "info": "Show product information as an overlay on the product image, or below. Does not effect the Alternating template."
+    },
+    {
+      "type": "range",
+      "id": "products-per-row",
+      "label": "Products per row",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "product-rows",
+      "label": "Number of rows",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "default": 1
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Featured collection"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subheading"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    }
+  ],
+  "presets": [
+    {
+      "category": "Collection",
+      "name": "Featured collection"
+    }
+  ]
+}
+
+{% endschema %}

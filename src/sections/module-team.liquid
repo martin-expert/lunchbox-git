@@ -1,0 +1,204 @@
+{% comment %}
+  Customisation option to force aspect ratio of images
+{% endcomment %}
+{%- capture placeholder_background_image -%}
+  {%-
+    include 'placeholder_svg_uri',
+    placeholder: 'image'
+  -%}
+{%- endcapture -%}
+
+<div class="module-wrapper style-{{ section.settings.style }}">
+  <div class="module team column-{{ section.settings.column_count }}">
+    {% if section.settings.title != blank or section.settings.subtitle != blank %}
+      <div class="module-header team-header">
+        {% if section.settings.title != blank %}
+          <div class="module-title">
+            <h3>{{ section.settings.title | escape }}</h3>
+          </div>
+        {% endif %}
+        {% if section.settings.subtitle != blank %}
+          <div class="module-subtitle">
+            {{ section.settings.subtitle | escape }}
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+    <div class="module-body clearfix">
+      <div class="list team-list">
+        {% for block in section.blocks %}
+            <div class="list-item" {{ block.shopify_attributes }}>
+              <div class="list-container">
+              {% if block.settings.image %}
+                {%- capture background_image_style -%}
+                  {%
+                    include 'rimg',
+                    background: true,
+                    img: block.settings.image,
+                    size: image_size,
+                    lazy: true
+                  %}
+                {%- endcapture -%}
+
+              {% else %}
+                {%- capture background_image_style -%}
+                  style="background-image: url('{{ placeholder_background_image }}');"
+                {%- endcapture -%}
+              {% endif %}
+              <div class="list-image-wrapper">
+                <div
+                  class="list-cover"
+                  {{ background_image_style }}
+                >
+                  {% if block.settings.image %}
+                    {% assign image_alt = block.settings.image.alt | default: block.settings.title | escape %}
+                    {%
+                      include 'rimg',
+                      class: 'list-image team-list-image',
+                      img: block.settings.image,
+                      alt: image_alt,
+                      size: '630x630',
+                      lazy: true
+                    %}
+                  {% else %}
+                    {{ 'image' | placeholder_svg_tag: 'placeholder-svg list-image team-list-image' }}
+                  {% endif %}
+                </div>
+              </div>
+
+              {% if block.settings.title != blank or block.settings.job_title != blank %}
+                <div class="list-text-wrapper team-text-wrapper">
+                  {% if block.settings.title != blank %}
+                    <div class="list-title team-list-title">
+                      {{ block.settings.title | escape }}
+                    </div>
+                  {% endif %}
+
+                  {% if block.settings.job_title %}
+                    <div class="list-meta team-list-meta">
+                      {{ block.settings.job_title | escape }}
+                    </div>
+                  {% endif %}
+                </div>
+              {% endif %}
+
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Team members",
+  "max_blocks": 8,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Team members"
+    },
+    {
+      "type": "select",
+      "id": "style",
+      "label": "Background style",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "light",
+          "label": "Light"
+        },
+        {
+          "value": "color",
+          "label": "Color"
+        },
+        {
+          "value": "gradient",
+          "label": "Gradient"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "select",
+      "id": "column_count",
+      "label": "Team members per row",
+      "options": [
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        },
+        {
+          "value": "4",
+          "label": "4"
+        }
+      ],
+      "default": "4"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subheading"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "team_member",
+      "name": "Team member",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "630 x 630px .png recommended"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Name",
+          "default": "Name"
+        },
+        {
+          "type": "text",
+          "id": "job_title",
+          "label": "Job title",
+          "default": "Job title"
+        }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      {
+        "type": "team_member",
+        "settings": {}
+      },
+      {
+        "type": "team_member",
+        "settings": {}
+      },
+      {
+        "type": "team_member",
+        "settings": {}
+      },
+      {
+        "type": "team_member",
+        "settings": {}
+      }
+    ]
+  }
+}
+{% endschema %}

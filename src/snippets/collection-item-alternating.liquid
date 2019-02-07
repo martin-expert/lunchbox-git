@@ -1,0 +1,139 @@
+{% assign item = product %}
+{% if section.settings.stock_overlay_show and item.available %}
+  {% assign total = 0 %}
+  {% assign threshold = section.settings.stock-overlay-threshold %}
+  {% assign infinity = false %}
+  {% for variant in item.variants %}
+    {% if variant.inventory_management == null or variant.inventory_management == '' %}
+      {% assign infinity = true %}
+    {% elsif infinity == false %}
+      {% capture temp %}{{ total | plus: variant.inventory_quantity }}{% endcapture %}
+      {% assign total = temp | times: 1 %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
+{% unless item.featured_image %}
+  {%- capture index -%}
+    {%- cycle '1', '2', '3', '4', '5', '6' -%}
+  {%- endcapture -%}
+  {% assign placeholder_image_style = 'product-' | append: index %}
+
+  {%- capture placeholder_background_image -%}
+    {%-
+      include 'placeholder_svg_uri',
+      placeholder: placeholder_image_style
+    -%}
+  {%- endcapture -%}
+
+  {%- capture background_style -%}
+    style="background-image: url('{{ placeholder_background_image }}');"
+  {%- endcapture -%}
+  {%- capture image -%}
+    {{ placeholder_image_style | placeholder_svg_tag: 'placeholder-svg collection-alternating-image' }}
+  {%- endcapture -%}
+{% else %}
+  {%- capture background_style -%}
+    {%
+      include 'rimg',
+      background: true,
+      img: item.featured_image,
+      size: '1024x1024',
+      crop: 'center',
+      lazy: true
+    %}
+  {%- endcapture -%}
+  {%- capture image -%}
+    {%
+      include 'rimg',
+      class: 'collection-alternating-image',
+      img: item.featured_image,
+      size: '1024x1024',
+      crop: 'center',
+      lazy: true
+    %}
+  {%- endcapture -%}
+{% endunless %}
+
+<div
+  class="
+    collection-alternating-product
+    style-light
+    media-aligned-{{ collection-alternating-cycle }}
+  "
+>
+  <div class="collection-alternating-section collection-alternating-media">
+    <a
+      class="
+        collection-alternating-cover
+        {% unless item.featured_image %}
+          collection-alternating-cover-placeholder
+        {% endunless %}
+      "
+      href="{{ item.url }}"
+      {{ background_style }}
+    >
+      {{ image }}
+    </a>
+
+    {% if section.settings.stock_overlay_show and item.available and infinity == false and total < threshold %}
+      <div class="stock-badge">
+        {{ 'products.product.stock_level' | t: stock_count: total }}
+      </div>
+    {% endif %}
+    {% if item.compare_at_price_min > item.price_min and item.available %}
+      <div class="sale-badge">
+        {{ 'products.product.sale' | t }}
+      </div>
+    {% endif %}
+  </div>
+  <div class="collection-alternating-section collection-alternating-content">
+    <div class="collection-alternating-text-wrapper">
+      <a class="module-title collection-alternating-title" href="{{ item.url }}">
+        {{ item.title }}
+      </a>
+      <div class="module-meta collection-alternating-meta">
+        {% if item.available %}
+          {% if item.price_varies %}
+            <span class="price">
+              {% if item.price_varies %}{{ 'products.product.from' | t }}{% endif %} <span class="money">{{ item.price_min | money }}</span>
+            </span>
+          {% else %}
+            <span class="price">
+              <span class="money">{{ item.price_min | money }}</span>
+              {% unless item.compare_at_price_min <= item.price_min %}
+                <span class="original money">
+                  {% if item.compare_at_price_min > item.price_min %}
+                    {{ item.compare_at_price_min | money }}
+                  {% endif %}
+                </span>
+                <span class="saving">
+                  {% if selectedVariant.compare_at_price > selectedVariant.price %}
+                    {{ "products.product.saving" | t }} <span class="saving-result money">{{ selectedVariant.compare_at_price | minus: selectedVariant.price | money }}</span>
+                  {% endif %}
+                </span>
+              {% endunless %}
+            </span>
+          {% endif %}
+        {% else %}
+          {{ 'products.product.sold_out' | t }}
+        {% endif %}
+      </div>
+      <div class="module-text collection-alternating-text">
+        {% if item.description contains 'tabs' and item.description contains 'tabs-content' %}
+          {% assign desc_array = item.description | split: '</ul>' %}
+          {% assign desc = desc_array[1] %}
+        {% else %}
+          {% assign desc = item.description %}
+        {% endif %}
+        {{ desc | strip_html | truncate: 250 }}
+      </div>
+      <div class="module-text collection-alternating-cta">
+        <a class="button outline collection-button" href="{{ item.url | within: collection }}">
+          {{ "customer.orders.order" | t }}
+          <span class="icon icon-arrow-right"></span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

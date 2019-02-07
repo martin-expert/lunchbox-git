@@ -1,0 +1,202 @@
+<div
+  class="module-wrapper style-{{ section.settings.style }} border"
+  data-section-id="{{ section.id }}"
+  data-section-type="testimonials">
+
+  <div class="module home-testimonials">
+    {% if section.settings.title != blank or section.settings.subtitle != blank %}
+      <div class="module-header">
+        {% if section.settings.title != blank %}
+          <h3 class="module-title home-testimonials-title">
+            {{ section.settings.title | escape }}
+          </h3>
+        {% endif %}
+        {% if section.settings.subtitle != blank %}
+          <p class="module-subtitle">
+            {{ section.settings.subtitle | escape }}
+          </p>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="module-body">
+      <div class="home-testimonials-container clearfix">
+        <div class="home-testimonials-slides">
+          <div class="home-testimonials-slides-list">
+            {% for block in section.blocks %}
+              {% capture current %}{% cycle 1, 2 %}{% endcapture %}
+
+              {%- capture testimonial_class -%}
+                home-testimonials-slides-list-item
+                {% if image %}has-avatar{% endif %}
+                {% if forloop.first %}active{% endif %}
+              {%- endcapture -%}
+
+              <div
+                class="{{- testimonial_class | strip_newlines -}}"
+                data-position="{{ forloop.index }}"
+                data-index="{{ forloop.index }}"
+                {{ block.shopify_attributes }}>
+
+                <div class="home-testimonials-slides-list-item-container">
+                  <div class="home-testimonials-slides-list-item-body">
+                    <div class="home-testimonial-quote">
+                      {{ block.settings.quote }}
+                    </div>
+                  </div>
+
+                  <div class="home-testimonials-slides-list-item-footer">
+                    <div class="home-testimonials-slides-list-item-footer-container clearfix">
+                      {% if block.settings.image %}
+                        <div class="home-testimonials-slides-list-item-footer-image">
+                          {%
+                            include 'rimg',
+                            class: 'home-testimonial-avatar',
+                            img: block.settings.image,
+                            size: '60x60',
+                            lazy: false,
+                            crop: 'center'
+                          %}
+                        </div>
+                      {% endif %}
+
+                      {% if block.settings.source != blank or block.settings.city != blank %}
+                        <div class="home-testimonials-slides-list-item-footer-text">
+                          {% if block.settings.source != blank %}
+                            <div class="home-testimonial-source">
+                              {{ block.settings.source | escape }}
+                            </div>
+                          {% endif %}
+                          {% if block.settings.city != blank %}
+                            <p class="home-testimonial-city">
+                              {{ block.settings.city | escape }}
+                            </p>
+                          {% endif %}
+                        </div>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              {% endfor %}
+          </div>
+        </div>
+
+        <div class="home-testimonials-pagination">
+          <div class="home-testimonials-pagination-list clearfix">
+            {% for block in section.blocks %}
+              <a class="home-testimonials-pagination-list-item {% if forloop.first %}active{% endif %}"
+                href="#"
+                data-position="{{ forloop.index }}">
+                <span class="home-testimonials-pagination-list-item-dot"></span>
+              </a>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="home-testimonials-navigation">
+          <div class="home-testimonials-navigation-item previous-slide">
+            <a class="home-testimonials-navigation-icon icon icon-arrow-left" href="#" tabindex="0"></a>
+          </div>
+          <div class="home-testimonials-navigation-item next-slide">
+            <a class="home-testimonials-navigation-icon icon icon-arrow-right" href="#" tabindex="0"></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Testimonials",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "select",
+      "id": "style",
+      "label": "Background style",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "light",
+          "label": "Light"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Testimonials"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subheading"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "quote",
+          "label": "Quote",
+          "default": "<p>Showcase up to six testimonials to build trust with potential customers.</p>"
+        },
+        {
+          "type": "text",
+          "id": "source",
+          "label": "Source",
+          "default": "Source"
+        },
+        {
+          "type": "text",
+          "id": "city",
+          "label": "City"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Avatar image",
+          "info": "120 x 120px .jpg required."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "category": "Text",
+      "name": "Testimonials",
+      "settings": {
+        "style": "default"
+      },
+      "blocks": [
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "<p>Showcase up to six testimonials to build trust with potential customers.</p>",
+            "source": "Source's name"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "<p>Showcase up to six testimonials to build trust with potential customers.</p>",
+            "source": "Source's name"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

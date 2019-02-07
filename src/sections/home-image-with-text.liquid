@@ -1,0 +1,156 @@
+{%- assign _section = section.settings -%}
+{% assign has_content = false %}
+{% assign has_cta = false %}
+
+{%- if _section.title != blank or _section.text != blank -%}
+  {% assign has_content = true %}
+{%- endif -%}
+
+{%- if _section.button_text != blank and _section.button_link != blank -%}
+  {% assign has_cta = true %}
+  {% assign has_content = true %}
+{%- endif -%}
+
+<div
+  class="
+    style-{{ _section.style }}
+    module-wrapper
+  "
+  data-section-id="{{ section.id }}"
+  data-section-type="image-with-text"
+>
+
+  <div
+    class="
+      module
+      image-with-text
+      has-media
+      {% if has_content %}
+        has-content
+      {% else %}
+        no-content
+      {% endif %}
+    "
+  >
+    {% if _section.title != blank %}
+      <div class="module-header image-with-text-header">
+        <h2 class="module-title image-with-text-module-title">
+          {{ _section.title | escape }}
+        </h2>
+      </div>
+    {% endif %}
+
+    {% if _section.text != blank or has_cta %}
+      <div class="module-body image-with-text-body">
+        {% if _section.text != blank %}
+          <div class="module-content image-with-text-content image-with-text-body-item">
+            {{ _section.text }}
+          </div>
+        {% endif %}
+
+        {% if has_cta %}
+          <div class="module-cta image-with-text-cta image-with-text-body-item">
+            {%- if _section.button_link == settings.pre_order_btn_url -%}
+              <a class="button" href="#" data-bk-preorders="https://lunchbox.backerkit.com/overlay_preorders">
+            {%- else -%}
+              <a class="button" href="{{ _section.button_link }}">
+            {%- endif -%}
+              {{ _section.button_text | escape }}
+            </a>
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    {% if _section.button_link != blank %}
+      {%- if _section.button_link == settings.pre_order_btn_url -%}
+        <a href="#" data-bk-preorders="https://lunchbox.backerkit.com/overlay_preorders">
+      {%- else -%}
+        <a href="{{ _section.button_link }}">
+      {%- endif -%}
+    {% endif %}
+
+    {% if _section.image %}
+      {%
+        include 'rimg',
+        class: 'image-with-text-media',
+        img: _section.image,
+        size: '2048x2048',
+        lazy: true
+      %}
+    {% else %}
+      {{ 'lifestyle-1' | placeholder_svg_tag: 'image-with-text-media placeholder-svg' }}
+    {% endif %}
+
+    {% if _section.button_link != blank %}
+      </a>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Image with text",
+  "settings": [
+    {
+      "type": "select",
+      "id": "style",
+      "label": "Background style",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "light",
+          "label": "Light"
+        },
+        {
+          "value": "color",
+          "label": "Color"
+        },
+        {
+          "value": "gradient",
+          "label": "Gradient"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Image with text"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Say a bit about your brand, a specific product, or promotion.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Link"
+    }
+  ],
+  "presets": [
+    {
+      "category": "Image",
+      "name": "Image with text",
+      "settings": {}
+    }
+  ]
+}
+
+{% endschema %}

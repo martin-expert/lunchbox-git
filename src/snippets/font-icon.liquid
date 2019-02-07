@@ -1,0 +1,6 @@
+<ion-icon
+  class="{{ class }} icon-size-{% if size %}{{ size }}{% else %}4x{% endif %}"
+  name="{{ icon | remove: 'ion-' | escape }}"
+  aria-hidden="true"
+  {% if title %}title="{{ title | strip_html | escape }}"{% endif %}>
+</ion-icon>

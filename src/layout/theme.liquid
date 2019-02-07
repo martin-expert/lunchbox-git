@@ -1,0 +1,73 @@
+<!doctype html>
+<html class="no-js" lang="{{ shop.locale }}">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+  {% assign tab_index = 0 %}
+
+  {% if template == 'index' %}
+    <title>{{ shop.name }} | {{ page_title }}</title>
+  {% elsif template == '404' %}
+    <title>{{ "general.404.title" | t }} | {{ shop.name }}</title>
+  {% else %}
+    <title>{{ page_title }} | {{ shop.name }}</title>
+  {% endif %}
+
+  {% if page_description %}
+    <meta name="description" content="{{ page_description | escape }}" />
+  {% endif %}
+
+  {% include 'favicon' %}
+
+  {% if template contains 'collection' and current_tags %}
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href="{{ shop.url }}{{ collection.url }}" />
+  {% else %}
+    <link rel="canonical" href="{{ canonical_url }}" />
+  {% endif %}
+
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  {{ content_for_header }}
+
+  {% assign twitter_handle = settings.social_twitter_url | split: 'twitter.com/' | last %}
+  {%
+    include 'social-meta-tags',
+    twitter_handle: twitter_handle
+  %}
+
+  {% include 'scripts-styles-header' %}
+</head>
+
+{% include 'additional-classes' %}
+<body class="{{ bodyClasses }}">
+
+  {% section 'pxs-announcement-bar' %}
+
+  {% section 'general-header' %}
+
+  <main class="main-content">
+
+    {% unless template contains 'index' or fullBleed %}
+      {% unless template contains 'slideshow' and settings.product-slideshow-layout == 'full-width' %}
+        {% include 'breadcrumbs' %}
+      {% endunless %}
+    {% endunless %}
+
+    {{ content_for_layout }}
+  </main>
+
+  {% section 'general-newsletter' %}
+
+  {% section 'general-social-feeds' %}
+
+  {% section 'general-footer' %}
+
+  {% include 'scripts-styles-footer' %}
+
+  {% include 'structured-data' %}
+
+</body>
+</html>

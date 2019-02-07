@@ -1,0 +1,121 @@
+{% assign grid_size = section.blocks.size %}
+{% if section.blocks.size > 4 %}
+  {% assign grid_size = 3 %}
+{% elsif section.blocks.size == 4 %}
+  {% assign grid_size = 2 %}
+{% endif %}
+
+{% if section.blocks.size > 0 or section.settings.title != blank %}
+  <div class="module-wrapper style-{{ section.settings.style }} border">
+    <div class="module home-collections">
+
+      {% if section.settings.title != blank %}
+        <div class="module-header home-collections-header">
+          <h3 class="module-title">
+            {{ section.settings.title | escape }}
+          </h3>
+
+          {% if section.settings.subtitle != blank %}
+            <div class="module-subtitle">
+              {{ section.settings.subtitle | escape }}
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      {% if section.blocks.size > 0 %}
+        <div class="module-body home-collections-body">
+          <div class="list column-{{ grid_size }}">
+
+            {% for block in section.blocks %}
+              {% assign show_product_count = false %}
+
+              {% if section.settings.show_product_count %}
+                {% assign show_product_count = false %}
+              {% endif %}
+
+              {%
+                include 'collection-list-item',
+                show_product_count: show_product_count,
+                collection: collections[block.settings.collection]
+              %}
+            {% endfor %}
+
+          </div>
+        </div>
+      {% endif %}
+
+    </div>
+  </div>
+{% endif %}
+{% schema %}
+{
+  "name": "Collection list",
+  "max_blocks": 9,
+  "settings": [
+    {
+      "type": "select",
+      "id": "style",
+      "label": "Background style",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "light",
+          "label": "Light"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Collection list"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subheading"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_product_count",
+      "label": "Show product count",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        {
+          "id": "collection",
+          "type": "collection",
+          "label": "Collection"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "category": "Collection",
+      "name": "Collection list",
+      "blocks": [
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

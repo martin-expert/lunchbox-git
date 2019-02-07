@@ -1,0 +1,133 @@
+<div
+  class="faq-module module-wrapper style-{{ section.settings.style }}"
+  data-section-id="{{ section.id }}"
+  data-section-type="faq">
+  <div class="module">
+    <div class="module-body clearfix">
+      <div class="module-list-item-content-toggle">
+        {% for block in section.blocks %}
+          {% if block.settings.title != blank and block.settings.text != blank %}
+
+            {% assign is_first = forloop.first %}
+            <article class="accordion-item" {{ block.shopify_attributes }}>
+              <h1 class="accordion-item-title">
+                <a
+                  class="{% if is_first %}accordion-active{% endif %}"
+                  href="#"
+                  data-accordion-trigger="accordion-{{ block.id }}">
+                  <span class="accordion-inline-title">
+                    {{ block.settings.title | escape }}
+                  </span>
+                  <span class="icon icon-angle-down accordion-item-icon"></span>
+                </a>
+              </h1>
+              <div
+                class="accordion-item-content rte"
+                data-accordion-content="accordion-{{ block.id }}"
+                {% unless is_first %}style="display: none;"{% endunless %}>
+                {{ block.settings.text }}
+              </div>
+            </article>
+
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "FAQ page",
+  "max_blocks": 20,
+  "settings": [
+    {
+      "type": "select",
+      "id": "style",
+      "label": "Background style",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "light",
+          "label": "Light"
+        },
+        {
+          "value": "color",
+          "label": "Color"
+        },
+        {
+          "value": "gradient",
+          "label": "Gradient"
+        }
+      ],
+      "default": "default"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "Text",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Question",
+          "default": "Want to know anything else?"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Answer",
+          "default": "<p>Save yourself the time and trouble of writing the same email over and over again by listing your most commonly asked questions and answers here. A dedicated FAQ page should help address the basic needs of your customers, cutting down on customer service emails, increasing conversions, and creating a more satisfying shopping experience!</p>"
+        }
+      ]
+    },
+    {
+      "type": "faq_html",
+      "name": "HTML",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Question",
+          "default": "Want to know anything else?"
+        },
+        {
+          "type": "html",
+          "id": "text",
+          "label": "Answer",
+          "default": "<p>Save yourself the time and trouble of writing the same email over and over again by listing your most commonly asked questions and answers here. A dedicated FAQ page should help address the basic needs of your customers, cutting down on customer service emails, increasing conversions, and creating a more satisfying shopping experience!</p>"
+        }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      {
+        "type": "faq",
+        "settings": {
+          "title": "Can I track my order?",
+          "text": "<p>Save yourself the time and trouble of writing the same email over and over again by listing your most commonly asked questions and answers here. A dedicated FAQ page should help address the basic needs of your customers, cutting down on customer service emails, increasing conversions, and creating a more satisfying shopping experience!</p>"
+        }
+      },
+      {
+        "type": "faq",
+        "settings": {
+          "title": "Where do you ship to?",
+          "text": "<p>Save yourself the time and trouble of writing the same email over and over again by listing your most commonly asked questions and answers here. A dedicated FAQ page should help address the basic needs of your customers, cutting down on customer service emails, increasing conversions, and creating a more satisfying shopping experience!</p>"
+        }
+      },
+      {
+        "type": "faq",
+        "settings": {
+          "title": "What are your shipping rates?",
+          "text": "<p>Save yourself the time and trouble of writing the same email over and over again by listing your most commonly asked questions and answers here. A dedicated FAQ page should help address the basic needs of your customers, cutting down on customer service emails, increasing conversions, and creating a more satisfying shopping experience!</p>"
+        }
+      }
+    ]
+  }
+}
+{% endschema %}

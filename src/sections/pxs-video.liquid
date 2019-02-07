@@ -1,0 +1,322 @@
+{%- assign _section = section.settings -%}
+{% assign video_type = _section.video.type | default: 'youtube' %}
+{% assign video_id = _section.video.id | default: '_9VUPq3SxOc' %}
+
+{% assign overlay_color = _section.overlay_color %}
+{% assign overlay_color_opacity = _section.overlay_color_opacity %}
+{% assign overlay_opacity_constrained = overlay_color_opacity | times: 0.01 %}
+{% assign overlay_color_with_opacity = overlay_color | color_modify: 'alpha', overlay_opacity_constrained %}
+
+<script
+  type="application/json"
+  data-section-type="pxs-video"
+  data-section-id="{{ section.id }}"
+  data-section-data
+>
+  {
+    "autoplay": {{ _section.autoplay | json }},
+    "startMuted": {{ _section.start_muted | json }}
+  }
+</script>
+
+<div class="pxs-video">
+  {%
+    if _section.title != blank
+    or _section.text != blank
+  %}
+    <div class="pxs-video-header">
+      {% if _section.title != blank %}
+        <h2 class="pxs-video-heading">
+          {{ _section.title }}
+        </h2>
+      {% endif %}
+
+      {% if _section.text != blank %}
+        <div class="pxs-video-text rte">
+          {{ _section.text }}
+        </div>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  <div
+    class="
+      video-container
+      video-aspect-ratio-{{ _section.aspect_ratio }}
+    "
+    data-video-container
+  >
+    {% if _section.overlay_show %}
+      <div
+        class="
+          video-overlay
+          video-overlay-button-{{ _section.overlay_button_style }}
+          {%-
+            if _section.overlay_heading != blank
+            or _section.overlay_text != blank
+          -%}
+            video-overlay-header-position-{{ _section.overlay_header_position }}
+          {%- endif -%}
+        "
+        {% capture background_styles %}
+          {%- if overlay_color_with_opacity != blank -%}
+            background-color: {{ overlay_color_with_opacity }};
+          {%- endif -%}
+          {%- if _section.overlay_image -%}
+            background-position: {{ _section.overlay_image_position | replace: '-', ' ' }};
+          {%- endif -%}
+        {% endcapture %}
+
+        {% if _section.overlay_image %}
+          {%
+            include 'rimg',
+            img: _section.overlay_image,
+            size: '1400x',
+            crop: 'center',
+            style: background_styles,
+            background: true,
+            lazy: true
+          %}
+        {% else %}
+          style="{{- background_styles -}}"
+        {% endif %}
+      >
+        {% if _section.overlay_image %}
+          {%
+            include 'rimg',
+            img: _section.overlay_image,
+            size: '1400x',
+            crop: 'center',
+            canvas: true,
+            lazy: true
+          %}
+        {% endif %}
+
+        {%
+          if _section.overlay_heading != blank
+          or _section.overlay_text != blank
+        %}
+          <div
+            class="video-overlay-header"
+            style="
+              {%- if _section.overlay_header_color != blank -%}
+                color: {{ _section.overlay_header_color }};
+              {%- endif -%}
+            "
+          >
+            {% if _section.overlay_heading != blank %}
+              <p class="video-overlay-heading">{{ _section.overlay_heading }}</p>
+            {% endif %}
+
+            {% if _section.overlay_text != blank %}
+              <div class="video-overlay-text rte">{{ _section.overlay_text }}</div>
+            {% endif %}
+          </div>
+        {% endif %}
+        <button
+          class="video-play-button"
+          data-video-play-button
+        >
+          <svg class="video-play-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="39" viewBox="0 0 24 39">
+            <path fill="currentColor" fill-rule="evenodd" d="M24 19.355L0 38.71V0"/>
+          </svg>
+
+          <svg class="video-loading-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <g fill="currentColor" fill-rule="evenodd">
+              <path class="video-loading-icon-phalange" d="M11,2 L11,6 C11,6.55228475 11.4477153,7 12,7 C12.5522847,7 13,6.55228475 13,6 L13,2 C13,1.44771525 12.5522847,1 12,1 C11.4477153,1 11,1.44771525 11,2 Z"/>
+              <path class="video-loading-icon-phalange" d="M16.9471068,8.46710678 L19.7771068,5.63710678 C20.1676311,5.24658249 20.1676311,4.61341751 19.7771068,4.22289322 C19.3865825,3.83236893 18.7534175,3.83236893 18.3628932,4.22289322 L15.5328932,7.05289322 C15.1423689,7.44341751 15.1423689,8.07658249 15.5328932,8.46710678 C15.9234175,8.85763107 16.5565825,8.85763107 16.9471068,8.46710678 Z"/>
+              <path class="video-loading-icon-phalange" d="M18,13 L22,13 C22.5522847,13 23,12.5522847 23,12 C23,11.4477153 22.5522847,11 22,11 L18,11 C17.4477153,11 17,11.4477153 17,12 C17,12.5522847 17.4477153,13 18,13 Z"/>
+              <path class="video-loading-icon-phalange" d="M15.5328932,16.9471068 L18.3628932,19.7771068 C18.7534175,20.1676311 19.3865825,20.1676311 19.7771068,19.7771068 C20.1676311,19.3865825 20.1676311,18.7534175 19.7771068,18.3628932 L16.9471068,15.5328932 C16.5565825,15.1423689 15.9234175,15.1423689 15.5328932,15.5328932 C15.1423689,15.9234175 15.1423689,16.5565825 15.5328932,16.9471068 Z"/>
+              <path class="video-loading-icon-phalange" d="M11,18 L11,22 C11,22.5522847 11.4477153,23 12,23 C12.5522847,23 13,22.5522847 13,22 L13,18 C13,17.4477153 12.5522847,17 12,17 C11.4477153,17 11,17.4477153 11,18 Z"/>
+              <path class="video-loading-icon-phalange" d="M5.63710678,19.7771068 L8.46710678,16.9471068 C8.85763107,16.5565825 8.85763107,15.9234175 8.46710678,15.5328932 C8.07658249,15.1423689 7.44341751,15.1423689 7.05289322,15.5328932 L4.22289322,18.3628932 C3.83236893,18.7534175 3.83236893,19.3865825 4.22289322,19.7771068 C4.61341751,20.1676311 5.24658249,20.1676311 5.63710678,19.7771068 Z"/>
+              <path class="video-loading-icon-phalange" d="M2,13 L6,13 C6.55228475,13 7,12.5522847 7,12 C7,11.4477153 6.55228475,11 6,11 L2,11 C1.44771525,11 1,11.4477153 1,12 C1,12.5522847 1.44771525,13 2,13 Z"/>
+              <path class="video-loading-icon-phalange" d="M4.22289322,5.63710678 L7.05289322,8.46710678 C7.44341751,8.85763107 8.07658249,8.85763107 8.46710678,8.46710678 C8.85763107,8.07658249 8.85763107,7.44341751 8.46710678,7.05289322 L5.63710678,4.22289322 C5.24658249,3.83236893 4.61341751,3.83236893 4.22289322,4.22289322 C3.83236893,4.61341751 3.83236893,5.24658249 4.22289322,5.63710678 Z"/>
+            </g>
+          </svg>
+        </button>
+      </div>
+    {% endif %}
+
+    <div
+      class="video video-{{ video_type }}"
+      data-video="{{ video_type }}"
+      data-video-id="{{ video_id }}"
+    >
+    </div>
+  </div>
+</div>
+
+{%- if _section.button_text and _section.button_link -%}
+  <div class="module-body image-with-text-body">
+    <div class="module-cta image-with-text-cta image-with-text-body-item">
+      {%- if _section.button_link == settings.pre_order_btn_url -%}
+        <a class="button" href="#" data-bk-preorders="https://lunchbox.backerkit.com/overlay_preorders">
+      {%- else -%}
+        <a class="button" href="{{ _section.button_link }}">
+      {%- endif -%}
+        {{ _section.button_text | escape }}
+      </a>
+    </div>
+  </div>
+{%- endif -%}
+
+
+
+{% schema %}
+{
+  "name": "Video",
+  "class": "pxs-video-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Video"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Enhance your home page with a video that relates to your process, products, or story.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Video"
+    },
+    {
+      "type": "video_url",
+      "id": "video",
+      "label": "YouTube or Vimeo link",
+      "accept": ["youtube", "vimeo"],
+      "default": "https://www.youtube.com/watch?v=_9VUPq3SxOc"
+    },
+    {
+      "type": "select",
+      "id": "aspect_ratio",
+      "label": "Aspect ratio",
+      "options": [
+        { "label": "16:9", "value": "16-9" },
+        { "label": "21:9", "value": "21-9" }
+      ],
+      "default": "16-9"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Autoplay",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "start_muted",
+      "label": "Mute audio on start",
+      "default": true,
+      "info": "If audio is not muted, some browsers will not allow autoplay."
+    },
+    {
+      "type": "header",
+      "content": "Overlay"
+    },
+    {
+      "type": "checkbox",
+      "id": "overlay_show",
+      "label": "Show overlay",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "overlay_heading",
+      "label": "Heading",
+      "default": "Video"
+    },
+    {
+      "type": "richtext",
+      "id": "overlay_text",
+      "label": "Text",
+      "default": "<p>Enhance your home page with a video that relates to your process, products, or story.</p>"
+    },
+    {
+      "type": "select",
+      "id": "overlay_header_position",
+      "label": "Heading and text position",
+      "options": [
+        { "label": "Above button", "value": "above-button" },
+        { "label": "Below button", "value": "below-button" }
+      ],
+      "default": "above-button"
+    },
+    {
+      "type": "color",
+      "id": "overlay_header_color",
+      "label": "Text color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Background color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "overlay_color_opacity",
+      "label": "Background color opacity",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 50
+    },
+    {
+      "type": "image_picker",
+      "id": "overlay_image",
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "id": "overlay_image_position",
+      "label": "Image position",
+      "options": [
+        { "label": "Left Top", "value": "left-top" },
+        { "label": "Left Center", "value": "left-center" },
+        { "label": "Left Bottom", "value": "left-bottom" },
+        { "label": "Center Top", "value": "center-top" },
+        { "label": "Center", "value": "center-center" },
+        { "label": "Center Bottom", "value": "center-bottom" },
+        { "label": "Right Top", "value": "right-top" },
+        { "label": "Right Center", "value": "right-center" },
+        { "label": "Right Bottom", "value": "right-bottom" }
+      ],
+      "default": "center-center",
+      "info": "Adjust the focal point of the image. Note: This setting will not have much of an impact if your background image's dimensions are roughly the same size as the section."
+    },
+    {
+      "type": "select",
+      "id": "overlay_button_style",
+      "label": "Button style",
+      "options": [
+        { "label": "Primary", "value": "primary" },
+        { "label": "Secondary", "value": "secondary" }
+      ],
+      "default": "primary"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Link"
+    }
+  ],
+  "presets": [
+    {
+      "category": "Video",
+      "name": "Video"
+    }
+  ]
+}
+
+{% endschema %}

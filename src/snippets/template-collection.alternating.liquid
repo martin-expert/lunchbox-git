@@ -1,0 +1,46 @@
+{% comment %}
+  Launch has opinionated tag filtering and background styles
+  Adjust these settings as needed to customise the template
+{% endcomment %}
+{% assign enable_tag_filtering = false %}
+{% assign collection_background_style = 'default' %}
+
+{% paginate collection.products by section.settings.products-per-page %}
+  <div class="module-wrapper style-{{ collection_background_style }}">
+    <div class="module collection collection-alternating">
+      <div class="module-header collection-header">
+        <div class="module-title">
+          {% if collection.handle == 'all' %}
+            <h1>{{ 'collections.collection.all_products' | t }}</h1>
+          {% else %}
+            <h1>{{ collection.title }}</h1>
+          {% endif %}
+        </div>
+        {% if collection.description != blank %}
+          <div class="module-subtitle collection-subtitle rte">
+            {{ collection.description }}
+          </div>
+        {% endif %}
+      </div>
+      <div class="module-body collection-body">
+        {% if collection.all_tags.size > 0 and enable_tag_filtering %}
+          {% include 'collection-tag-selector' %}
+        {% endif %}
+        {% assign product_count = collection.products.size | plus: 0 %}
+        <div class="collection-list">
+          {% if product_count > 0 %}
+            {% for product in collection.products %}
+              {% capture collection-alternating-cycle %}{% cycle 'left', 'right' %}{% endcapture %}
+              {% include 'collection-item-alternating' %}
+            {% endfor %}
+          {% else %}
+            <p class="empty">{{ 'collections.collection.no_products' | t }}</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+  {% if paginate.previous or paginate.next %}
+    {% include 'pagination' %}
+  {% endif %}
+{% endpaginate %}

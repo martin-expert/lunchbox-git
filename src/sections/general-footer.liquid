@@ -1,0 +1,267 @@
+<div class="footer-wrapper style-{{ section.settings.style }} {% if section.settings.enable_borders %}has-borders{% endif %}">
+  <footer class="main-footer">
+    {% if section.blocks.size or section.settings.show_logo %}
+      <div class="footer-row footer-columns clearfix">
+        {% if section.settings.show_logo %}
+          <div class="footer-column footer-logo">
+            <a class="footer-logo-link" href="/">
+              {% if section.settings.footer_logo or section.settings.footer_logo_alternate %}
+                {% assign logo_image = blank %}
+
+                {% if section.settings.footer_logo_alternate and section.settings.style == 'dark' %}
+                  {% assign logo_image = section.settings.footer_logo_alternate %}
+                {% else %}
+                  {% assign logo_image = section.settings.footer_logo %}
+                {% endif %}
+
+                {%
+                  include 'rimg',
+                  class: 'footer-logo-image',
+                  img: logo_image,
+                  alt: logo_alt,
+                  size: '200x100',
+                  lazy: false
+                %}
+              {% else %}
+                <h2 class="branding-logo">{{ shop.name }}</h2>
+              {% endif %}
+            </a>
+          </div>
+        {% endif %}
+
+        {% for block in section.blocks %}
+          {% if block.type == 'menu' %}
+            {% assign menu = block.settings.menu %}
+            {% if linklists[menu].links != blank %}
+              <div class="footer-column footer-menu">
+                <h4 class="footer-title footer-menu-title">{{ linklists[menu].title }}</h4>
+                <ul class="footer-menu-list">
+                  {% for link in linklists[menu].links %}
+                    <li class="footer-menu-list-item">
+                      <a class="footer-menu-list-item-anchor" href="{{ link.url }}">{{ link.title }}</a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            {% endif %}
+          {% endif %}
+
+          {% if block.type == 'social_media' %}
+            {% assign social_media = 'Facebook|Twitter|Google+|Pinterest|Instagram|Vimeo|YouTube|RSS'  %}
+            {% assign social_media_accounts = social_media | downcase | replace: '+', '' | split: '|' %}
+            {% assign social_media_titles = social_media | split: '|' %}
+            {% assign has_links = false %}
+
+            {% for account in social_media_accounts %}
+              {% assign setting = 'social_' | append: account | append: '_url' %}
+              {% if settings[setting] != blank %}
+                {% assign has_links = true %}
+                {% break %}
+              {% endif %}
+            {% endfor %}
+
+            {% if has_links %}
+              <div class="footer-column footer-menu">
+                <h4 class="footer-title footer-menu-title">{{ "general.social.social" | t }}</h4>
+                <ul class="footer-menu-list">
+                  {%- for account in social_media_accounts -%}
+                    {% assign setting = 'social_' | append: account | append: '_url' %}
+                    {% assign title = social_media_titles[forloop.index0] %}
+
+                    {%- if settings[setting] != blank -%}
+                      <li class="footer-menu-list-item">
+                        <a
+                          class="footer-menu-list-item-anchor"
+                          href="{{ settings[setting] | escape }}"
+                          target="_blank"
+                          title="{{ title }}"
+                        >
+                          {{ title }}
+                        </a>
+                      </li>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </ul>
+              </div>
+            {% endif %}
+          {% endif %}
+
+          {% if block.type == 'richtext' %}
+            <div class="footer-column footer-content">
+              {% if block.settings.title != blank %}
+                <h4 class="footer-title footer-content-title">
+                  {{ block.settings.title | escape }}
+                </h4>
+              {% endif %}
+              {% if block.settings.text != blank %}
+                <div class="footer-content-text">
+                  {{ block.settings.text }}
+                </div>
+              {% endif %}
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <div role="contentinfo" class="footer-row footer-information">
+      <p class="footer-copyright">
+        {% capture year %}{{ "now" | date: "%Y" }}{% endcapture %}
+        {{ 'general.general.copyright_text_html' | t: year: year }} {{ 'general.general.copyright_credit_html' | t }} {{ powered_by_link }}.
+      </p>
+
+      {% if shop.enabled_payment_types.size > 0 and section.settings.payment_icons %}
+        <ul class="payment-icons">
+          {% for type in shop.enabled_payment_types %}
+            <li class="payment-icon">
+              {{ type | payment_type_svg_tag }}
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+  </footer>
+</div>
+
+{% schema %}
+{
+  "name": "Footer",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "select",
+      "id": "style",
+      "label": "Background style",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "dark",
+          "label": "Dark"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_borders",
+      "label": "Show borders",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "payment_icons",
+      "label": "Show payment icons",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Logo"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_logo",
+      "label": "Show logo in footer",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "footer_logo",
+      "label": "Logo image",
+      "info": "400 x 200px .png recommended"
+    },
+    {
+      "type": "image_picker",
+      "id": "footer_logo_alternate",
+      "label": "Inverted logo image",
+      "info": "400 x 200px .png recommended"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "menu",
+      "name": "Menu",
+      "settings": [
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu",
+          "default": "main-menu",
+          "info": "This menu won't show dropdown items"
+        }
+      ]
+    },
+    {
+      "type": "social_media",
+      "name": "Social media links",
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Configure your social media links under \"General settings\" in \"Social media\""
+        }
+      ],
+      "limit": 1
+    },
+    {
+      "type": "richtext",
+      "name": "Rich text",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Rich text"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Use this section to welcome customers to your store, say a bit about your brand, or share news and seasonal promotions.</p>"
+        }
+      ],
+      "limit": 1
+    }
+  ],
+  "default": {
+    "blocks": [
+      {
+        "type": "menu",
+        "settings": {
+          "menu": "main-menu"
+        }
+      },
+      {
+        "type": "menu",
+        "settings": {
+          "menu": "footer"
+        }
+      }
+    ]
+  }
+}
+
+{% endschema %}
+
+<script>
+  
+  jQuery(document).ready(function(){
+    // setTimeout(PreorderToday,3000);
+  });
+  
+  function PreorderToday(){
+    var preorder_today = jQuery('a:contains("Preorder Today") span');
+    preorder_today.click();
+    console.log('preorder-today clicked');
+    setTimeout(ClickProduct,6000);
+  }
+  function ClickProduct(){
+     jQuery('iframe.bk_preorders').bind("load",function(){
+        jQuery(this).contents().find(".panel-overlay").click();
+      console.log('ClickProduct clicked');
+    });
+  }
+  
+  
+</script>

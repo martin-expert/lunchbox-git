@@ -1,0 +1,42 @@
+{% assign list_class = section.settings.text_placement | prepend: 'list-text-wrapper-' %}
+
+<div class="list collection-list clearfix {{ list_class }}">
+  {% if product_count > 0 %}
+    {% for product in collection.products %}
+      {% assign loopindex = forloop.index | modulo: 4 %}
+      {% if forloop.first == true %}
+        <div class="list-row">
+          {%
+            include 'product-list-item',
+            list_style: 'list-item-random list-item-aspected',
+            show_cover_image: true
+          %}
+      {% endif %}
+      {% if loopindex == 1 and forloop.first == false and forloop.last == false %}
+        </div>
+        <div class="list-row">
+          {%
+            include 'product-list-item',
+            list_style: 'list-item-random list-item-aspected',
+            show_cover_image: true
+          %}
+      {% elsif loopindex != 1 and forloop.first == false and forloop.last == false %}
+        {%
+          include 'product-list-item',
+          list_style: 'list-item-random list-item-aspected',
+          show_cover_image: true
+        %}
+      {% endif %}
+      {% if forloop.last == true %}
+        {%
+          include 'product-list-item',
+          list_style: 'list-item-random list-item-aspected',
+          show_cover_image: true
+        %}
+        </div>
+      {% endif %}
+    {% endfor %}
+  {% else %}
+    <p class="empty">{{ 'collections.collection.no_products' | t }}</p>
+  {% endif %}
+</div>

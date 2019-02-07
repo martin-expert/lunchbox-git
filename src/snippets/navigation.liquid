@@ -1,0 +1,80 @@
+{%- comment -%}
+  @param navigation_menu {drop}
+    Drop of menu to use for the navigation
+  @param navigation_id {string}
+    ID to differential Navigations needed for when multiple `<nav>` occur on the same page
+{%- endcomment -%}
+
+{%- capture dropdown_arrow -%}
+  <a
+    class="icon icon-angle-down header-navigation-list-arrow"
+    data-dropdown-toggle
+    tabindex="0"
+    aria-controls="--menu_button_control_id--"
+    aria-haspopup="true"
+    aria-expanded="false"
+  >
+    <span class="show-for-sr">
+      {{ 'general.general.toggle_dropdown' | t }}
+    </span>
+  </a>
+{%- endcapture -%}
+
+<nav class="navigation" id="{{ navigation_id }}">
+  <ul class="header-navigation-list clearfix">
+    {% for link in linklists[navigation_menu].links %}
+      {% assign has_dropdown = false %}
+      {% if link.links.size > 0 %}
+        {% assign has_dropdown = true %}
+        {% assign secondary_menu_id = navigation_id | append: '-menu-' | append: forloop.index %}
+      {% endif %}
+      <li class="header-navigation-list-item primary-list-item {% if has_dropdown %}has-dropdown{% endif %}">
+        <a
+          class="header-navigation-link primary-link {% if link.active %}header-navigation-current{% endif %}"
+          href="{{ link.url }}"
+        >
+          {{ link.title }}
+        </a>
+        {% if has_dropdown %}
+          {{- dropdown_arrow | replace: '--menu_button_control_id--', secondary_menu_id -}}
+          <ul 
+            class="header-navigation-list secondary-list clearfix"
+            id="{{ secondary_menu_id }}"
+            data-is-dropdown
+          >
+            {% for link in link.links %}
+              {% assign has_dropdown = false %}
+              {% if link.links.size > 0 %}
+                {% assign has_dropdown = true %}
+                {% assign tertiary_menu_id = secondary_menu_id | append: '-menu-' | append: forloop.index %}
+              {% endif %}
+              <li class="header-navigation-list-item secondary-list-item{% if has_dropdown %} has-dropdown{% endif %}">
+                <a class="header-navigation-link secondary-link" href="{{ link.url }}">
+                  {{ link.title }}
+                </a>
+
+                {% if has_dropdown %}
+                  {{- dropdown_arrow | replace: '--menu_button_control_id--', tertiary_menu_id -}}
+
+                  <ul
+                    class="header-navigation-list tertiary-list clearfix"
+                    id="{{ tertiary_menu_id }}"
+                    data-is-dropdown
+                  >
+                    {% for link in link.links %}
+                      <li class="header-navigation-list-item tertiary-list-item">
+                        <a class="header-navigation-link tertiary-link" href="{{ link.url }}">
+                          {{ link.title }}
+                        </a>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+</nav>
